@@ -18,9 +18,9 @@ function obtenerLocalidades() {
                 option.textContent = registro.nombre
 
                 selectLocalides.appendChild(option)
-                
 
-                
+
+
             }
 
         })
@@ -31,15 +31,15 @@ function obtenerLocalidades() {
 
 let selectBarrios = document.getElementById("barrio");
 
-selectLocalides.addEventListener("change",function(){
+selectLocalides.addEventListener("change", function () {
     const id_localidad = this.value
 
-selectBarrios.innerHTML = "";
+    selectBarrios.innerHTML = "";
 
-if (id_localidad == "") {
-    return
-}
-    
+    if (id_localidad == "") {
+        return
+    }
+
     obtenerBarrios(id_localidad)
 })
 
@@ -52,7 +52,7 @@ function obtenerBarrios(id_localidad) {
             console.log(datos);
 
 
-             
+
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -181,7 +181,7 @@ formulario.addEventListener("submit", validarDatos);
 function validarDatos(event) {
     let errores = [];
     event.preventDefault()
-    if (nombre.value== "") {
+    if (nombre.value == "") {
         console.log("nombre vacio")
         errores.push("*Nombre es requerido");
     }
@@ -196,7 +196,7 @@ function validarDatos(event) {
     else if (apellido.value.length > 60) {
         errores.push("*Apellido debe tener como máximo 60 caracteres");
     };
-    
+
     console
     if (tipoDocumento.value == "" || isNaN(tipoDocumento.value)) {
         console.log("tipo de documento vacio")
@@ -204,7 +204,7 @@ function validarDatos(event) {
     }
 
     console.log(numeroDoc.value);
-    
+
     if (numeroDoc.value == "" || isNaN(numeroDoc.value)) {
         console.log("número documento vacio")
         errores.push("*Número documento es requerido, si desconoce el dato, ingrese 0");
@@ -239,10 +239,9 @@ function validarDatos(event) {
         console.log("barrio vacio")
         errores.push("*Barrio es requerido");
     }
-   
-    
-    console.table(errores)
-    
+
+
+
     contenedorErrores.innerHTML = "";
 
     errores.forEach(function (item, index) {
@@ -250,13 +249,13 @@ function validarDatos(event) {
         contenedorErrores.appendChild(parrafo);
         parrafo.textContent = item;
         parrafo.classList.add("mb-1")
-     });
+    });
 
 
-     obtenerLocalidades()
-let selectLocalides = document.getElementById("localidad");
+    obtenerLocalidades()
+    let selectLocalides = document.getElementById("localidad");
 
-     crearObjeto()
+    crearObjeto()
     // mostrarErrores.innerHTML = contenido;
 
     // if (errores.length >= 1) {
@@ -289,13 +288,13 @@ let selectLocalides = document.getElementById("localidad");
     //         botonGuardar.disabled = true
     //     }
 
-        // 
+    // 
     // }
 }
 
 // functionObtenerDatos() {
-  
-    
+
+
 // }
 function crearObjeto() {
     let = contenidoFormulario = {
@@ -316,14 +315,9 @@ function crearObjeto() {
         id_condicion: condicionIVA.value
     }
 
-    
-console.log(contenidoFormulario)
 
-obtenerDNI()
+    console.log(contenidoFormulario)
 
-}
-
-function obtenerDNI() {
     axios.get('http://localhost:3000/clientes')
         .then(respuesta => {
 
@@ -336,12 +330,21 @@ function obtenerDNI() {
                 let registro = datos[indice];
 
                 const numeroDocBD = registro.numero_documento;
+
                 console.log(numeroDocBD)
-                
+
+                if (numeroDoc.value == numeroDocBD) {
+                    alert("El número de documento ya se encuentra registrado")
+                    console.log("DNI repetido")
+                }
             }
 
         })
         .catch(error => {
             console.error('Hubo un problema con la solicitud:', error);
         });
+
+
 }
+
+

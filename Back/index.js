@@ -84,19 +84,20 @@ app.get('/tipos_cliente', (req, res) => {
     res.status(200).json(results);
 });
 });
-// app.post('/cliente', async (req, res) => {
-//   const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
-//   connection.query(
-//       'INSERT INTO cliente (nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-//       [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
+
+app.post('/clientes', (req, res) => {
+  const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion } = req.body;
+  connection.query(
+      'INSERT INTO cliente (nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion],
+      (err, results) => {
+          if (err) {
+              return res.status(500).json({ error: err.message });
+          }
+          res.status(201).json({ id: results.insertId });
+      }
+  );
+});
 
 // app.put('/cliente', (req, res) => {
 //   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
