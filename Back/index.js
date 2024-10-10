@@ -58,6 +58,32 @@ app.get('/barrios/:id_localidad', (req, res) => {
   });
 });
 
+app.get('/tipos_documento', (req, res) => {
+  connection.query('SELECT id_tipo_documento, nombre FROM tipodocumento', (err, results) => {
+    if (err) {
+        return res.status(500).json({ error: err.message });
+    }
+    res.status(200).json(results);
+});
+});
+
+app.get('/tipos_iva', (req, res) => {
+  connection.query('SELECT id_condicion, nombre FROM condicioniva', (err, results) => {
+    if (err) {
+        return res.status(500).json({ error: err.message });
+    }
+    res.status(200).json(results);
+});
+});
+
+app.get('/tipos_cliente', (req, res) => {
+  connection.query('SELECT id_tipo_cliente, nombre FROM tipocliente', (err, results) => {
+    if (err) {
+        return res.status(500).json({ error: err.message });
+    }
+    res.status(200).json(results);
+});
+});
 // app.post('/cliente', async (req, res) => {
 //   const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
 //   connection.query(

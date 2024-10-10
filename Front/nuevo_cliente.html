@@ -277,7 +277,7 @@
           <div class="card card-primary">
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+            <form action="" id="formulario">
               <div class="card-body">
                 <div class="form-group row">
                   <div class="col-12">
@@ -285,34 +285,24 @@
                   </div>
 
                     <div class="col-12 mb-3">
-                      <input type="text" class="form-control" id="nombre" placeholder="Nombre/Razón social" required name="nombre">
+                      <input type="text" class="form-control" id="nombre" placeholder="Nombre/Razón social"  name="nombre">
                     </div>
                     <div class="col-12 mb-3">
-                      <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
+                      <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" >
                     </div>
                  
                   <div class="col-6 col-sm-4 col-md-3 mb-3 mb-sm-0">
-                    <select class="form-control" required id="tipoDocumento" name="tipoDocumento">
-                      <option>Tipo de documento</option>
-                      <option>DNI</option>
-                      <option>CUIL</option>
-                      <option>CUIT</option>
-                      <option>Pasaporte</option>
-                      <option>Otro</option>
+                    <select class="form-control"  id="tipoDocumento" name="tipoDocumento">
+                      <option value="">Tipo de documento</option>
                     </select>
                   </div>
                   <div class="col-6 col-sm-4 col-md-3">
-                    <input type="number" class="form-control" id="numeroDoc" name="numeroDoc" placeholder="Número" required>
+                    <input type="number" class="form-control" id="numeroDoc" name="numeroDoc" placeholder="Número" >
                   </div>
                   
                   <div class="col-12 col-sm-4 col-md-6">
-                    <select class="form-control" required id="condicionIVA" name="condicionIVA">
-                      <option>Cond. frente al IVA</option>
-                      <option>Consumidor final</option>
-                      <option>Exento</option>
-                      <option>Responsable Inscripto</option>
-                      <option>Monotributo</option>
-                      <option>Otro</option>
+                    <select class="form-control"  id="condicionIVA" name="condicionIVA">
+                      <option value="">Cond. frente al IVA</option>
                     </select>
                   </div>
 
@@ -323,7 +313,7 @@
                     <label for="telefono">Datos de contacto</label>
                   </div>
                   <div class="col-5">
-                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" required>
+                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" >
                   </div>
                   <div class="col-7">
                     <input type="text" class="form-control" placeholder="E-mail" id="email" name="email">
@@ -335,27 +325,27 @@
                     <label for="direccion">Dirección</label>
                   </div>
                   <div class="col-9 col-md-6 col-lg-8 mb-3">
-                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" required>
+                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" >
                   </div>
                   <div class="col-3 col-md-2 col-lg-2">
-                    <input type="number" class="form-control" id="numeroDir" name="numeroDir" placeholder="Número" required>
+                    <input type="number" class="form-control" id="numeroDir" name="numeroDir" placeholder="Número" >
                   </div>
                   <div class="col-2 col-md-2 col-lg-1 mb-3">
-                    <input type="text" class="form-control" id="piso" name="piso" placeholder="Piso" required>
+                    <input type="text" class="form-control" id="piso" name="piso" placeholder="Piso" >
                   </div>
                   <div class="col-2 col-md-2 col-lg-1">
-                    <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Dpto" required>
+                    <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Dpto" >
                   </div>
                 
                   <div class="col-8 col-md-7 mb-3">
-                    <select class="form-control" id="localidad" name="localidad" required>
+                    <select class="form-control" id="localidad" name="localidad" >
                       <option value="">Localidad</option>
                     </select>
                   </div>
 
 
                   <div class="col-12 col-md-5">
-                    <select class="form-control" id="barrio" name="barrio" required>
+                    <select class="form-control" id="barrio" name="barrio" >
                       <option value="">Barrio</option>
                     </select>
                   </div>
@@ -367,8 +357,6 @@
                   </div>
                   <div class="col-5">
                     <select id="tipoCliente" name="tipoCliente" class="form-control">
-                      <option value="1">Minorista</option>
-                      <option value="2">Mayorista</option>
                     </select>
                   </div>
                   <div class="col-6"></div>
@@ -386,6 +374,13 @@
               </div> -->
             </form>
           </div>
+          
+          <div id="contenedorErrores">
+            <!-- /.card-header -->
+            <!-- form start -->
+            
+          </div>
+
           <!-- /.card -->
         </section>
       </div>
