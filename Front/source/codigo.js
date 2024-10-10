@@ -70,7 +70,7 @@ obtenerClientes();
 // }
 
 function obtenerClientes() {
-    axios.get('http://localhost:3000/cliente')
+    axios.get('http://localhost:3000/clientes')
         .then(respuesta => {
 
             let datos = respuesta.data;

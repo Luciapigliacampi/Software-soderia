@@ -28,20 +28,41 @@ app.get('/', (req, res) => {
   res.send('API Funcionando OK');
 });
 
-app.get('/cliente', (req, res) => {
+app.get('/clientes', (req, res) => {
   connection.query('SELECT c.*, b.nombre as nombre_barrio, l.nombre as nombre_localidad, t.nombre as nombre_tipo_cliente, td.nombre as nombre_tipo_documento FROM cliente as c inner join barrio as b on b.id_barrio = c.id_barrio inner join localidad as l on l.id_localidad = c.id_localidad inner join tipocliente as t on t.id_tipo_cliente = c.id_tipo_cliente inner join tipodocumento as td on td.id_tipo_documento = c.id_tipo_documento WHERE c.estado=1 OR c.estado is null ORDER BY c.nombre asc', (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }
-      res.json(results);
+      res.status(200).json(results);
   });
 });
 
-// app.post('/cliente', (req, res) => {
-//   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
+
+app.get('/localidades', (req, res) => {
+  connection.query('SELECT id_localidad, nombre FROM localidad ORDER BY nombre asc', (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results);
+  });
+});
+
+app.get('/barrios/:id_localidad', (req, res) => {
+  const id_localidad = req.params.id_localidad;
+
+  connection.query(`SELECT id_barrio, nombre FROM barrio WHERE id_localidad = ${id_localidad} ORDER BY nombre asc`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results);
+  });
+});
+
+// app.post('/cliente', async (req, res) => {
+//   const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
 //   connection.query(
 //       'INSERT INTO cliente (nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-//       [nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento],
+//       [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento],
 //       (err, results) => {
 //           if (err) {
 //               return res.status(500).json({ error: err.message });

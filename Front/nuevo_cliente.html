@@ -283,11 +283,16 @@
                   <div class="col-12">
                     <label for="datosContacto">Datos personales</label>
                   </div>
-                  <div class="col-12 mb-3">
-                    <input type="text" class="form-control" id="nombreApellido" placeholder="Nombre y apellido/Razón social">
-                  </div>
+
+                    <div class="col-12 mb-3">
+                      <input type="text" class="form-control" id="nombre" placeholder="Nombre/Razón social" required name="nombre">
+                    </div>
+                    <div class="col-12 mb-3">
+                      <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
+                    </div>
+                 
                   <div class="col-6 col-sm-4 col-md-3 mb-3 mb-sm-0">
-                    <select class="form-control">
+                    <select class="form-control" required id="tipoDocumento" name="tipoDocumento">
                       <option>Tipo de documento</option>
                       <option>DNI</option>
                       <option>CUIL</option>
@@ -297,11 +302,11 @@
                     </select>
                   </div>
                   <div class="col-6 col-sm-4 col-md-3">
-                    <input type="number" class="form-control" id="nombreApellido" placeholder="Número">
+                    <input type="number" class="form-control" id="numeroDoc" name="numeroDoc" placeholder="Número" required>
                   </div>
                   
                   <div class="col-12 col-sm-4 col-md-6">
-                    <select class="form-control">
+                    <select class="form-control" required id="condicionIVA" name="condicionIVA">
                       <option>Cond. frente al IVA</option>
                       <option>Consumidor final</option>
                       <option>Exento</option>
@@ -315,13 +320,13 @@
 
                 <div class="form-group row">
                   <div class="col-12">
-                    <label for="datosContacto">Datos de contacto</label>
+                    <label for="telefono">Datos de contacto</label>
                   </div>
                   <div class="col-5">
-                    <input type="text" class="form-control" id="datosContacto" placeholder="Teléfono">
+                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" required>
                   </div>
                   <div class="col-7">
-                    <input type="text" class="form-control" placeholder="E-mail">
+                    <input type="text" class="form-control" placeholder="E-mail" id="email" name="email">
                   </div>
                 </div>
 
@@ -330,26 +335,28 @@
                     <label for="direccion">Dirección</label>
                   </div>
                   <div class="col-9 col-md-6 col-lg-8 mb-3">
-                    <input type="text" class="form-control" id="direccion" placeholder="Calle">
+                    <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" required>
                   </div>
                   <div class="col-3 col-md-2 col-lg-2">
-                    <input type="number" class="form-control" placeholder="Número">
+                    <input type="number" class="form-control" id="numeroDir" name="numeroDir" placeholder="Número" required>
                   </div>
                   <div class="col-2 col-md-2 col-lg-1 mb-3">
-                    <input type="text" class="form-control" id="direccion" placeholder="Piso">
+                    <input type="text" class="form-control" id="piso" name="piso" placeholder="Piso" required>
                   </div>
                   <div class="col-2 col-md-2 col-lg-1">
-                    <input type="text" class="form-control" placeholder="Dpto">
+                    <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Dpto" required>
                   </div>
-                  <div class="col-8 col-md-5">
-                    <input type="text" class="form-control" placeholder="Barrio">
+                
+                  <div class="col-8 col-md-7 mb-3">
+                    <select class="form-control" id="localidad" name="localidad" required>
+                      <option value="">Localidad</option>
+                    </select>
                   </div>
-                  <div class="col-12 col-md-7">
-                    <select class="form-control">
-                      <option>Villa María</option>
-                      <option>Villa Nueva</option>
-                      <option>Tío Pujio</option>
-                      <option>Arroyo Cabral</option>
+
+
+                  <div class="col-12 col-md-5">
+                    <select class="form-control" id="barrio" name="barrio" required>
+                      <option value="">Barrio</option>
                     </select>
                   </div>
                 </div>
@@ -359,9 +366,9 @@
                     <label for="tipoCliente">Tipo de cliente</label>
                   </div>
                   <div class="col-5">
-                    <select id="tipoCliente" class="form-control">
-                      <option>Minorista</option>
-                      <option>Mayorista</option>
+                    <select id="tipoCliente" name="tipoCliente" class="form-control">
+                      <option value="1">Minorista</option>
+                      <option value="2">Mayorista</option>
                     </select>
                   </div>
                   <div class="col-6"></div>
@@ -422,5 +429,7 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="source/nuevo_cliente.js"></script>
 </body>
 </html>
