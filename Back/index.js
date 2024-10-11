@@ -87,6 +87,8 @@ app.get('/tipos_cliente', (req, res) => {
 
 app.post('/clientes', (req, res) => {
   const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion } = req.body;
+  
+  
   connection.query(
       'INSERT INTO cliente (nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion],
@@ -98,6 +100,17 @@ app.post('/clientes', (req, res) => {
       }
   );
 });
+
+app.delete('/clientes/:id_cliente', (req, res) => {
+  const id_cliente = req.params.id_cliente;
+
+  connection.query(`UPDATE cliente set estado=0 WHERE id_cliente=${id_cliente}`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results);
+  });
+})
 
 // app.put('/cliente', (req, res) => {
 //   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;

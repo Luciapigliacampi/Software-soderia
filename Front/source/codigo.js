@@ -118,42 +118,34 @@ function obtenerClientes() {
                 datoEmail.textContent = registro.correo_electronico;
                 let datoTipoCliente = document.createElement('td');
                 datoTipoCliente.textContent = registro.nombre_tipo_cliente;
+                let acciones = document.createElement('td');
+                let botonEliminar = document.createElement('button');
+                botonEliminar.textContent = "Eliminar";
+                botonEliminar.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-2', 'me-2');
+                botonEliminar.addEventListener('click', function () {
+                    if (window.confirm("¿Desea eliminar el registro?")) {
+                        
+                        eliminarCliente(registro.id_cliente);
+                    }
+                    // window.location.href = '#titulo'
+                });
 
-                // let celdaAcciones = document.createElement('td');
+                let botonModificar = document.createElement('button');
+                botonModificar.textContent = "Modificar";
+                botonModificar.classList.add('btn', 'btn-secondary', 'btn-sm', 'ms-2', 'me-2');
+                botonModificar.setAttribute("data-toggle","modal")
+                botonModificar.setAttribute("data-target","#modal-default")
+                
+                botonModificar.addEventListener('click', function (event) {
 
-                // let botonEliminar = document.createElement('button');
-                // botonEliminar.textContent = "Eliminar";
-                // botonEliminar.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-2', 'me-2');
-                // botonEliminar.addEventListener('click', function () {
-                //     if (window.confirm("¿Desea eliminar el registro?")) {
-                //         eliminarUsuario(registro.id);
-                //     }
-                //     window.location.href = '#titulo'
-                // });
-
-                // let botonConsultar = document.createElement('button');
-                // botonConsultar.textContent = "Consultar";
-                // botonConsultar.classList.add('btn', 'btn-primary', 'btn-sm', 'ms-2', 'me-2');
-                // botonConsultar.addEventListener('click', function () {
-                //     consultarDatos(registro)
-                //     botonGuardar.disabled = true
-                //     botonActualizar.disabled = true
-                //     window.location.href = '#contenedorCarga'
-                // })
-
-                // let botonModificar = document.createElement('button');
-                // botonModificar.textContent = "Modificar";
-                // botonModificar.classList.add('btn', 'btn-secondary', 'btn-sm', 'ms-2', 'me-2');
-                // botonModificar.addEventListener('click', function () {
-                //     modificarDatos(registro)
+                // modificarDatos(registro)
                 //     botonGuardar.disabled = true;
                 //     botonActualizar.disabled = false;
                 //     window.location.href = '#contenedorCarga'
-                // })
+                })
 
-                // celdaAcciones.appendChild(botonEliminar);
-                // celdaAcciones.appendChild(botonConsultar);
-                // celdaAcciones.appendChild(botonModificar);
+                acciones.appendChild(botonEliminar);
+                acciones.appendChild(botonModificar);
 
                 filaTabla.appendChild(datoNombre);
                 filaTabla.appendChild(datoTelefono);
@@ -162,7 +154,7 @@ function obtenerClientes() {
                 filaTabla.appendChild(datoLocalidad);
                 filaTabla.appendChild(datoEmail);
                 filaTabla.appendChild(datoTipoCliente);
-                // filaTabla.appendChild(celdaAcciones);
+                filaTabla.appendChild(acciones);
 
                 tablaClientes.appendChild(filaTabla);
             }
@@ -171,6 +163,17 @@ function obtenerClientes() {
         .catch(error => {
             console.error('Hubo un problema con la solicitud:', error);
         });
+}
+
+function eliminarCliente(id) {
+    axios.delete('http://localhost:3000/clientes/' + id)
+                .then(respuesta => {
+                    alert("Cliente eliminado");
+                    obtenerClientes();
+                })
+                .catch(error => {
+                    console.error('Hubo un problema con la solicitud:', error);
+                });
 }
 
 // let botonGuardar = document.getElementById("botonGuardar");

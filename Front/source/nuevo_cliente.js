@@ -197,7 +197,6 @@ function validarDatos(event) {
         errores.push("*Apellido debe tener como máximo 60 caracteres");
     };
 
-    console
     if (tipoDocumento.value == "" || isNaN(tipoDocumento.value)) {
         console.log("tipo de documento vacio")
         errores.push("*Tipo de documento es requerido");
@@ -222,7 +221,7 @@ function validarDatos(event) {
         console.log("calle vacio")
         errores.push("*Calle es requerido");
     }
-    else if (calle.value.length > 12) {
+    else if (calle.value.length > 60) {
         errores.push("*Calle debe tener como máximo 60 caracteres");
     };
 
@@ -244,60 +243,37 @@ function validarDatos(event) {
 
     contenedorErrores.innerHTML = "";
 
-    errores.forEach(function (item, index) {
-        parrafo = document.createElement('p');
-        contenedorErrores.appendChild(parrafo);
-        parrafo.textContent = item;
-        parrafo.classList.add("mb-1")
-    });
 
 
-    obtenerLocalidades()
+    if (errores.length > 0) {
+
+        errores.forEach(function (item, index) {
+            parrafo = document.createElement('p');
+            contenedorErrores.appendChild(parrafo);
+            parrafo.textContent = item;
+            parrafo.classList.add("mb-1")
+        });
+        return
+    }
+
+
     let selectLocalides = document.getElementById("localidad");
 
-    crearObjeto()
-    // mostrarErrores.innerHTML = contenido;
+    const cliente = crearObjeto()
+    console.log(cliente);
 
-    // if (errores.length >= 1) {
-    //     contenedorErrores.classList.add("contenedorErrores")
-    // };
-
-    // if (errores.length == 0) {
-
-    //     console.table(sectores)
-
-    //     let posicion = getRandomInt(sectores.length)
-    //     let sector = sectores[posicion]
-    //     console.log(sector)
-    //     sectores.splice(posicion, 1)
-
-    //     console.table(sectores)
-
-    //     if (piso.value.trim() == "") {
-    //         personal.push(`${apellido.value}, ${nombre.value} cuyo domicilio es ${calle.value} ${numero.value} de la Ciudad de ${ciudad.value} tiene asignado el sector ${sector}`)
-    //     }
-    //     else {
-    //         personal.push(`${apellido.value}, ${nombre.value} cuyo domicilio es ${calle.value} ${numero.value}, Piso ${piso.value} departamento ${departamento.value} de la Ciudad de ${ciudad.value} tiene asignado el sector ${sector}`)
-    //     }
-    //     console.table(personal);
-
-    //     formulario.reset();
-
-    //     if (personal.length == 3) {
-    //         alert("Haz alcanzado el máximo número de registros")
-    //         botonGuardar.disabled = true
-    //     }
-
-    // 
-    // }
+    axios.post('http://localhost:3000/clientes', cliente)
+        .then(response => {
+            console.log('Cliente creado con éxito:', response.data);
+        })
+        .catch(error => {
+            console.error('Hubo un error al crear el cliente:', error.response ? error.response.data : error.message);
+        });
 }
 
-// functionObtenerDatos() {
 
-
-// }
 function crearObjeto() {
-    let = contenidoFormulario = {
+    let contenidoFormulario = {
         nombre: nombre.value,
         apellido: apellido.value,
         telefono: telefono.value,
@@ -310,41 +286,15 @@ function crearObjeto() {
         numero_documento: numeroDoc.value,
         estado: 1,
         numero_dir: numeroDir.value,
-        piso: piso.value,
+        piso: piso.value == "" ? null:piso.value,
         departamento: departamento.value,
-        id_condicion: condicionIVA.value
+        id_condicion: condicionIVA.value == "" ? 1:condicionIVA.value
     }
 
 
-    console.log(contenidoFormulario)
-
-    axios.get('http://localhost:3000/clientes')
-        .then(respuesta => {
-
-            let datos = respuesta.data;
-
-            console.log(datos);
-
-
-            for (let indice = 0; indice < datos.length; indice++) {
-                let registro = datos[indice];
-
-                const numeroDocBD = registro.numero_documento;
-
-                console.log(numeroDocBD)
-
-                if (numeroDoc.value == numeroDocBD) {
-                    alert("El número de documento ya se encuentra registrado")
-                    console.log("DNI repetido")
-                }
-            }
-
-        })
-        .catch(error => {
-            console.error('Hubo un problema con la solicitud:', error);
-        });
-
+    return contenidoFormulario
 
 }
+
 
 
