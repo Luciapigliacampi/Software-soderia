@@ -112,6 +112,51 @@ app.delete('/clientes/:id_cliente', (req, res) => {
   });
 })
 
+app.get('/clientes/:id', (req, res) => {
+  const id_cliente = req.params.id;
+
+  connection.query(`SELECT c.*, b.id_barrio, l.id_localidad, t.id_tipo_cliente, td.id_tipo_documento FROM cliente as c inner join barrio as b on b.id_barrio = c.id_barrio inner join localidad as l on l.id_localidad = c.id_localidad inner join tipocliente as t on t.id_tipo_cliente = c.id_tipo_cliente inner join tipodocumento as td on td.id_tipo_documento = c.id_tipo_documento WHERE c.id_cliente= ${id_cliente}`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results[0]);
+  });
+});
+
+app.put('/clientes/:id_cliente', (req, res) => {
+  const id_cliente = req.params.id_cliente;
+
+  const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion } = req.body;
+  
+  
+  connection.query(
+      `UPDATE cliente
+  SET nombre = ?,
+      apellido = ?,
+      telefono = ?,
+      calle = ?,
+      id_barrio = ?,
+      id_localidad = ?,
+      correo_electronico = ?,
+      id_tipo_cliente = ?,
+      id_tipo_documento = ?,
+      numero_documento = ?,
+      estado = ?,
+      numero_dir = ?,
+      piso = ?,
+      departamento = ?,
+      id_condicion = ?
+  WHERE id_cliente = ?`,
+      [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion, id_cliente],
+      (err, results) => {
+          if (err) {
+              return res.status(500).json({ error: err.message });
+          }
+          res.status(201).json({ id: results.insertId });
+      }
+  );
+});
+
 // app.put('/cliente', (req, res) => {
 //   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
 //   connection.query(
