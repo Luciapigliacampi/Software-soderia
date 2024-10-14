@@ -187,7 +187,7 @@ app.get('/clientes/:dni', (req, res) => {
 
 
 app.get('/pedidos', (req, res) => {
-  connection.query(`SELECT p.* CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente ORDER BY p.id_pedido desc`, (err, results) => {
+  connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente ORDER BY p.id_pedido desc`, (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }

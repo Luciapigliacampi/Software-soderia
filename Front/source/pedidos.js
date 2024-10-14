@@ -24,13 +24,15 @@ function obtenerPedidos() {
                 enlacePedido.setAttribute("data-target", "#modal-default")
                 enlacePedido.textContent = `#${registro.id_pedido}`;
                 datoNumeroPedido.appendChild(enlacePedido)
+
+                let datoFecha = document.createElement('td');
+                datoFecha.textContent = new Date(registro.fecha).toLocaleDateString('es-ES', { year:"numeric", month:"short", day:"numeric"});
                 
                 let datoCliente = document.createElement('td');
                 datoCliente.textContent = registro.nombre_cliente;
 
-                // let datoTotal = document.createElement('td');
-                // datoTotal.textContent = registro.total;
-
+                let datoTotal = document.createElement('td');
+                datoTotal.textContent = registro.total;
                 
 
             //     let datoFecha = document.createElement('td');
@@ -90,9 +92,10 @@ function obtenerPedidos() {
             //     acciones.appendChild(botonModificar);
 
                 filaTabla.appendChild(datoNumeroPedido);
+                filaTabla.appendChild(datoFecha);
                 filaTabla.appendChild(datoCliente);
-                // filaTabla.appendChild(datoDireccion);
-                // filaTabla.appendChild(datoBarrio);
+                filaTabla.appendChild(datoTotal);
+               
                 // filaTabla.appendChild(datoLocalidad);
                 // filaTabla.appendChild(datoEmail);
                 // filaTabla.appendChild(datoTipoCliente);
