@@ -162,7 +162,6 @@ let formulario = document.getElementById('formulario');
 let nombre = document.getElementById('nombre');
 let apellido = document.getElementById('apellido');
 let tipoDocumento = document.getElementById('tipoDocumento');
-
 let numeroDoc = document.getElementById('numeroDoc');
 let telefono = document.getElementById('telefono');
 let email = document.getElementById('email');
@@ -202,12 +201,11 @@ function validarDatos(event) {
         errores.push("*Tipo de documento es requerido");
     }
 
-    console.log(numeroDoc.value);
-
     if (numeroDoc.value == "" || isNaN(numeroDoc.value)) {
         console.log("número documento vacio")
         errores.push("*Número documento es requerido, si desconoce el dato, ingrese 0");
-    }
+    } 
+    
 
     if (telefono.value.trim() == "") {
         console.log("teléfono vacio")
@@ -269,6 +267,7 @@ function validarDatos(event) {
         .catch(error => {
             console.error('Hubo un error al crear el cliente:', error.response ? error.response.data : error.message);
         });
+
 }
 
 
@@ -295,6 +294,3 @@ function crearObjeto() {
     return contenidoFormulario
 
 }
-
-
-

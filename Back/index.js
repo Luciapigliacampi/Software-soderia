@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/clientes', (req, res) => {
-  connection.query('SELECT c.*, b.nombre as nombre_barrio, l.nombre as nombre_localidad, t.nombre as nombre_tipo_cliente, td.nombre as nombre_tipo_documento FROM cliente as c inner join barrio as b on b.id_barrio = c.id_barrio inner join localidad as l on l.id_localidad = c.id_localidad inner join tipocliente as t on t.id_tipo_cliente = c.id_tipo_cliente inner join tipodocumento as td on td.id_tipo_documento = c.id_tipo_documento WHERE c.estado=1 OR c.estado is null ORDER BY c.nombre asc', (err, results) => {
+  connection.query('SELECT c.*, b.nombre as nombre_barrio, l.nombre as nombre_localidad, t.nombre as nombre_tipo_cliente, td.nombre as nombre_tipo_documento FROM cliente as c inner join barrio as b on b.id_barrio = c.id_barrio inner join localidad as l on l.id_localidad = c.id_localidad inner join tipocliente as t on t.id_tipo_cliente = c.id_tipo_cliente inner join tipodocumento as td on td.id_tipo_documento = c.id_tipo_documento WHERE c.estado=1 ORDER BY c.nombre asc', (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }
@@ -86,19 +86,51 @@ app.get('/tipos_cliente', (req, res) => {
 });
 
 app.post('/clientes', (req, res) => {
+  // Capturo datos del formulario
   const { nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion } = req.body;
-  
-  
-  connection.query(
-      'INSERT INTO cliente (nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion],
-      (err, results) => {
-          if (err) {
-              return res.status(500).json({ error: err.message });
-          }
-          res.status(201).json({ id: results.insertId });
+
+  // consulta a la base de datos
+  connection.query(`SELECT estado, id_cliente FROM cliente WHERE numero_documento = ${numero_documento}`, (err, results) => {
+    // si da error
+      if (err) {
+          return res.status(500).json({ error: err.message });
       }
-  );
+      //si devuelve un resultado y estado es 1 (estado1 = activo)
+      if (results.length > 0 && results[0].estado == 1) {
+
+        return res.status(200).json({ mensaje: "Este cliente ya existe con el DNI ingresado" });
+      } 
+      //si devuelve resultado y estado es 0 (estado 0 = eliminado)
+      else if (results.length > 0 && results[0].estado == 0) {
+        //envia los datos a la base de datos
+        connection.query(
+          `UPDATE cliente SET nombre = ?, apellido = ?, telefono = ?, calle = ?, id_barrio = ?, id_localidad = ?, correo_electronico = ?, id_tipo_cliente = ?, id_tipo_documento = ?, numero_documento = ?, estado = ?, numero_dir = ?, piso = ?, departamento = ?, id_condicion = ?
+      WHERE id_cliente = ?`,
+          [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion, results[0].id_cliente],
+          (err, results) => {
+              if (err) {
+                  return res.status(500).json({ error: err.message });
+              }
+              return res.status(201).json({ id: results.insertId });
+          }
+      );
+      } else {
+        // si no devuelve nada envia a la base de datos
+      connection.query(
+        'INSERT INTO cliente (nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion],
+        (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            return res.status(201).json({ id: results.insertId });
+        }
+    );
+      }
+      
+  });
+  
+  
 });
 
 app.delete('/clientes/:id_cliente', (req, res) => {
@@ -130,22 +162,7 @@ app.put('/clientes/:id_cliente', (req, res) => {
   
   
   connection.query(
-      `UPDATE cliente
-  SET nombre = ?,
-      apellido = ?,
-      telefono = ?,
-      calle = ?,
-      id_barrio = ?,
-      id_localidad = ?,
-      correo_electronico = ?,
-      id_tipo_cliente = ?,
-      id_tipo_documento = ?,
-      numero_documento = ?,
-      estado = ?,
-      numero_dir = ?,
-      piso = ?,
-      departamento = ?,
-      id_condicion = ?
+      `UPDATE cliente SET nombre = ?, apellido = ?, telefono = ?, calle = ?, id_barrio = ?, id_localidad = ?, correo_electronico = ?, id_tipo_cliente = ?, id_tipo_documento = ?, numero_documento = ?, estado = ?, numero_dir = ?, piso = ?, departamento = ?, id_condicion = ?
   WHERE id_cliente = ?`,
       [nombre, apellido, telefono, calle, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento, estado, numero_dir, piso, departamento, id_condicion, id_cliente],
       (err, results) => {
@@ -155,6 +172,27 @@ app.put('/clientes/:id_cliente', (req, res) => {
           res.status(201).json({ id: results.insertId });
       }
   );
+});
+
+app.get('/clientes/:dni', (req, res) => {
+  const numero_documento = req.params.dni;
+
+  connection.query(`SELECT estado FROM cliente WHERE numero_documento = ${numero_documento}`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results[0]);
+  });
+});
+
+
+app.get('/pedidos', (req, res) => {
+  connection.query('SELECT p.*, c.nombre as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente WHERE p.estado=1 ORDER BY p.id_pedido desc', (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.status(200).json(results);
+  });
 });
 
 // app.put('/cliente', (req, res) => {
