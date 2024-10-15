@@ -214,7 +214,7 @@ function obtenerCliente(id) {
             departamento.value = respuesta.data.departamento;
             tipoCliente.value = respuesta.data.id_tipo_cliente;
             localidad.value = respuesta.data.id_localidad;
-            idCliente.value = respuesta.data.id_cliente
+            idCliente.value = respuesta.data.id_cliente 
 
             obtenerBarrios(respuesta.data.id_localidad,respuesta.data.id_barrio)
 

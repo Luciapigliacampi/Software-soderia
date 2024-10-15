@@ -266,6 +266,7 @@ function validarDatos(event) {
                 alert(response.data.error)
             } else {
                 alert(response.data.message)
+                location.reload()
             }
         })
         .catch(error => {
