@@ -27,9 +27,9 @@
       <h3 class="text-center">Bienvenido a Bubblify</h3>
       <p class="login-box-msg">Ingresá a tu cuenta para gestionar tu sodería</p>
 
-      <form action="">
+      <form id="formularioLogin">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Email o Usuario">
+          <input type="text" class="form-control" placeholder="Email o Usuario" name="usuario">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Contraseña">
+          <input type="password" class="form-control" placeholder="Contraseña" name="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -85,5 +85,7 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+
+<script src="source/login.js"></script>
 </body>
 </html>

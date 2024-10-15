@@ -61,7 +61,7 @@ function obtenerPedidos() {
                 
                 
                 let datoAcciones = document.createElement('td');
-                datoAcciones.classList.add('d-none', 'd-md-table-cell');
+                datoAcciones.classList.add('d-md-table-cell');
 
 
                 // let botonModificar = document.createElement('button');
@@ -77,13 +77,19 @@ function obtenerPedidos() {
 
                 let botonEliminar = document.createElement('button');
                 botonEliminar.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');
-                botonEliminar.innerHTML = '<i class="fas fa-trash"></i>'
+                botonEliminar.innerHTML = '<i class="fas fa-trash text-danger"></i>'
 
                 datoAcciones.appendChild(botonEliminar)
 
                 botonEliminar.addEventListener('click', function (event) {
-                    eliminarPedido(registro.id_pedido);
+                    if (window.confirm("¿Desea eliminar el registro?")) {
+
+                        eliminarPedido(registro.id_pedido);
+                    }
+                    
                 })
+
+
 
                 // let botonCheck = document.createElement('button');
                 // botonCheck.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');

@@ -136,9 +136,12 @@ function obtenerClientes(busqueda = "") {
                 let datoTipoCliente = document.createElement('td');
                 datoTipoCliente.textContent = registro.nombre_tipo_cliente;
                 let acciones = document.createElement('td');
+                acciones.classList.add('d-md-table-cell');
                 let botonEliminar = document.createElement('button');
-                botonEliminar.textContent = "Eliminar";
-                botonEliminar.classList.add('btn', 'btn-danger', 'btn-sm', 'ms-2', 'me-2');
+
+                botonEliminar.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');
+                botonEliminar.innerHTML = '<i class="fas fa-trash text-danger"></i>'
+
                 botonEliminar.addEventListener('click', function () {
                     if (window.confirm("¿Desea eliminar el registro?")) {
 
@@ -148,8 +151,8 @@ function obtenerClientes(busqueda = "") {
                 });
 
                 let botonModificar = document.createElement('button');
-                botonModificar.textContent = "Modificar";
-                botonModificar.classList.add('btn', 'btn-secondary', 'btn-sm', 'ms-2', 'me-2');
+                botonModificar.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');
+                botonModificar.innerHTML = '<i class="fas fa-edit"></i>'
                 botonModificar.setAttribute("data-toggle", "modal")
                 botonModificar.setAttribute("data-target", "#modal-default")
 
