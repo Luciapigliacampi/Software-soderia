@@ -1,5 +1,16 @@
 obtenerClientes();
 
+const textoBusqueda = document.getElementById("textoBusqueda");
+let retardoEspera = null;
+textoBusqueda.addEventListener('input', (event) => {
+    event.preventDefault();
+    clearTimeout(retardoEspera);
+    retardoEspera = setTimeout(() => {
+        obtenerClientes(textoBusqueda.value)
+    }, 300); 
+    
+})
+
 // function eliminarUsuario(codigo) {
 //     console.log(typeof codigo);
 
@@ -69,8 +80,14 @@ obtenerClientes();
 
 // }
 
-function obtenerClientes() {
-    axios.get(`http://localhost:3000/clientes`)
+function obtenerClientes(busqueda = "") {
+    let filtro = ""
+    if(busqueda == "") {
+        filtro = ""
+    } else {
+        filtro = `?buscar=${busqueda}`
+    }
+    axios.get(`http://localhost:3000/clientes${filtro}`)
         .then(respuesta => {
 
             let datos = respuesta.data;
