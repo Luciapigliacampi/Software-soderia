@@ -175,14 +175,63 @@ app.put('/clientes/:id_cliente', (req, res) => {
 });
 
 
+
+
+
+// RUTAS PARA PRODUCTOS
+app.get('/productos', (req, res) => {
+  connection.query('SELECT * FROM producto WHERE estado = 1 AND stock > 0', (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      return res.json(results);
+  });
+});
+
+
+// RUTAS PARA PEDIDOS
 app.get('/pedidos', (req, res) => {
-  connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente ORDER BY p.id_pedido desc`, (err, results) => {
+  connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente WHERE p.estado <> 0 ORDER BY p.id_pedido desc`, (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }
       res.status(200).json(results);
   });
 });
+
+app.post('/pedidos', (req, res) => {
+  const {cliente,detalle,subtotal,total,iva,fecha_entrega,estado} = req.body;
+
+  connection.query('INSERT INTO pedido (fecha,id_cliente,estado,fecha_estimada_entrega,total) VALUES (Now(),?,?,?,?)',[cliente,estado,fecha_entrega,total], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if(results) {
+        let insertedId = results.insertId
+
+        for (let index = 0; index < detalle.length; index++) {
+          const element = detalle[index];
+          connection.query('INSERT INTO productoxpedido (id_producto,id_pedido,cantidad,estado,precio_unitario,precio_total) VALUES (?,?,?,?,?,?)',[element.codigo,insertedId,element.cantidad,1,element.valor_unitario,element.total_producto], (err, results) => {
+              if (err) {
+                  return res.status(500).json({ error: err.message });
+              }
+          });
+        }
+      }
+      return res.json({ message:"Pedido creado con éxito",id: results.insertId });
+  });
+});
+
+app.delete('/pedidos/:id_pedido', (req, res) => {
+  const id_pedido = req.params.id_pedido;
+
+  connection.query(`UPDATE pedido SET estado=0 WHERE id_pedido=${id_pedido}`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      return res.status(200).json(results);
+  });
+})
 
 // app.put('/cliente', (req, res) => {
 //   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
@@ -198,14 +247,7 @@ app.get('/pedidos', (req, res) => {
 //   );
 // });
 
-// app.get('/producto', (req, res) => {
-//   connection.query('SELECT * FROM producto', (err, results) => {
-//       if (err) {
-//           return res.status(500).json({ error: err.message });
-//       }
-//       res.json(results);
-//   });
-// });
+
 
 // app.post('/producto', (req, res) => {
 //   const { nombre, volumen, stock, id_tipo_producto } = req.body;

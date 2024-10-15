@@ -33,7 +33,68 @@ function obtenerPedidos() {
 
                 let datoTotal = document.createElement('td');
                 datoTotal.textContent = registro.total;
+
+                let estadoPedido = "";
+                switch (parseInt(registro.estado)) {
+                    case 1:
+                        estadoPedido = "Pendiente"
+                        break;
+                    case 2:
+                        estadoPedido = "En Preparación"
+                        break;
+                    case 3:
+                        estadoPedido = "Listo para Repartir"
+                        break;
+                    case 4:
+                        estadoPedido = "En reparto"
+                        break;
+                    case 5:
+                        estadoPedido = "Entregado"
+                        break;
+                }
+
+                let datoEstado = document.createElement('td');
+                datoEstado.textContent = estadoPedido;
+
+                let datoDiaReparto = document.createElement('td');
+                datoDiaReparto.textContent = new Date(registro.fecha_estimada_entrega).toLocaleDateString('es-ES', { year:"numeric", month:"short", day:"numeric"});
                 
+                
+                let datoAcciones = document.createElement('td');
+                datoAcciones.classList.add('d-none', 'd-md-table-cell');
+
+
+                // let botonModificar = document.createElement('button');
+                // botonModificar.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');
+                // botonModificar.innerHTML = '<i class="fas fa-edit"></i>'
+
+                // datoAcciones.appendChild(botonModificar)
+
+                // botonModificar.addEventListener('click', function (event) {
+                //     // obtenerCliente(registro.id_cliente)
+
+                // })
+
+                let botonEliminar = document.createElement('button');
+                botonEliminar.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');
+                botonEliminar.innerHTML = '<i class="fas fa-trash"></i>'
+
+                datoAcciones.appendChild(botonEliminar)
+
+                botonEliminar.addEventListener('click', function (event) {
+                    eliminarPedido(registro.id_pedido);
+                })
+
+                // let botonCheck = document.createElement('button');
+                // botonCheck.classList.add('btn', 'btn-sm', 'ms-2', 'me-2');
+                // botonCheck.innerHTML = '<i class="fas fa-check"></i>'
+
+                // datoAcciones.appendChild(botonCheck)
+
+                // botonCheck.addEventListener('click', function (event) {
+                //     // obtenerCliente(registro.id_cliente)
+
+                // })
 
             //     let datoFecha = document.createElement('td');
             //     datoFecha.textContent = registro.fecha;
@@ -95,6 +156,9 @@ function obtenerPedidos() {
                 filaTabla.appendChild(datoFecha);
                 filaTabla.appendChild(datoCliente);
                 filaTabla.appendChild(datoTotal);
+                filaTabla.appendChild(datoEstado);
+                filaTabla.appendChild(datoDiaReparto);
+                filaTabla.appendChild(datoAcciones);
                
                 // filaTabla.appendChild(datoLocalidad);
                 // filaTabla.appendChild(datoEmail);
@@ -104,6 +168,17 @@ function obtenerPedidos() {
                 tablaPedidos.appendChild(filaTabla);
             }
 
+        })
+        .catch(error => {
+            console.error('Hubo un problema con la solicitud:', error);
+        });
+}
+
+function eliminarPedido(id) {
+    axios.delete('http://localhost:3000/pedidos/' + id)
+        .then(respuesta => {
+            alert("Pedido eliminado");
+            obtenerPedidos();
         })
         .catch(error => {
             console.error('Hubo un problema con la solicitud:', error);
