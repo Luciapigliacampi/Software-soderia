@@ -262,10 +262,18 @@ function validarDatos(event) {
 
     axios.post('http://localhost:3000/clientes', cliente)
         .then(response => {
-            console.log('Cliente creado con éxito:', response.data);
+            if (response.data.error) {
+                alert(response.data.error)
+            } else {
+                alert(response.data.message)
+            }
         })
         .catch(error => {
-            console.error('Hubo un error al crear el cliente:', error.response ? error.response.data : error.message);
+            if(error.response.data.error) {
+                alert(error.response.data.error)
+            } else {
+                alert(error.message)
+            }
         });
 
 }

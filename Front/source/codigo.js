@@ -70,7 +70,7 @@ obtenerClientes();
 // }
 
 function obtenerClientes() {
-    axios.get('http://localhost:3000/clientes')
+    axios.get(`http://localhost:3000/clientes`)
         .then(respuesta => {
 
             let datos = respuesta.data;
@@ -478,10 +478,19 @@ function validarDatos(event) {
 
     axios.put('http://localhost:3000/clientes/' + idCliente.value, cliente)
         .then(response => {
-            console.log('Cliente creado con éxito:', response.data);
+            if(response.data.error) {
+                alert(response.data.error)
+            } else {
+                alert(response.data.message)
+                location.reload()
+            }
         })
         .catch(error => {
-            console.error('Hubo un error al crear el cliente:', error.response ? error.response.data : error.message);
+            if(error.response.data.error) {
+                alert(error.response.data.error)
+            } else {
+                alert(error.message)
+            }
         });
 }
 

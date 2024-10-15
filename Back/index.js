@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   res.send('API Funcionando OK');
 });
 
-app.get('/clientes', (req, res) => {
+app.get('/clientes/:busqueda?', (req, res) => {
   connection.query('SELECT c.*, b.nombre as nombre_barrio, l.nombre as nombre_localidad, t.nombre as nombre_tipo_cliente, td.nombre as nombre_tipo_documento FROM cliente as c inner join barrio as b on b.id_barrio = c.id_barrio inner join localidad as l on l.id_localidad = c.id_localidad inner join tipocliente as t on t.id_tipo_cliente = c.id_tipo_cliente inner join tipodocumento as td on td.id_tipo_documento = c.id_tipo_documento WHERE c.estado=1 ORDER BY c.nombre asc', (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
@@ -98,7 +98,7 @@ app.post('/clientes', (req, res) => {
       //si devuelve un resultado y estado es 1 (estado1 = activo)
       if (results.length > 0 && results[0].estado == 1) {
 
-        return res.status(200).json({ mensaje: "Este cliente ya existe con el DNI ingresado" });
+        return res.status(409).json({ error: "Este cliente ya existe con el DNI ingresado" });
       } 
       //si devuelve resultado y estado es 0 (estado 0 = eliminado)
       else if (results.length > 0 && results[0].estado == 0) {
@@ -123,7 +123,7 @@ app.post('/clientes', (req, res) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            return res.status(201).json({ id: results.insertId });
+            return res.status(201).json({ message: "Cliente guardado con éxito", id: results.insertId });
         }
     );
       }
@@ -169,7 +169,7 @@ app.put('/clientes/:id_cliente', (req, res) => {
           if (err) {
               return res.status(500).json({ error: err.message });
           }
-          res.status(201).json({ id: results.insertId });
+          return res.status(201).json({ message:"Cliente modificado con éxito",id: results.insertId });
       }
   );
 });
