@@ -3,7 +3,15 @@ formularioLogin.addEventListener('submit', (event) => {
     event.preventDefault()
 
     const datos = new FormData(formularioLogin)
+    
+    console.log(datos.get("usuario"));
+    
 
-    location.href = "http://127.0.0.1:5500/Software-soderia/Front/panel.html"
+    if(datos.get("usuario") != "luciapiglia" || datos.get("password") != "12345") {
+        alert("Usuario o clave incorrecta");
+        return;
+    }
+
+    location.href = "panel.html"
     
 })

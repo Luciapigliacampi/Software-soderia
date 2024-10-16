@@ -277,6 +277,22 @@ app.get('/pedidos/:id_pedido', (req, res) => {
 });
 
 
+// RUTAS LOGIN
+app.post('/login', (req, res) => {
+  const datos = req.body
+  console.log(datos);
+
+  return res.status(200).json(datos);
+  
+  // connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente WHERE p.estado <> 0 ORDER BY p.id_pedido desc`, (err, results) => {
+  //     if (err) {
+  //         return res.status(500).json({ error: err.message });
+  //     }
+  //     res.status(200).json(results);
+  // });
+});
+
+
 // app.put('/cliente', (req, res) => {
 //   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
 //   connection.query(

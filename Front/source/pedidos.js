@@ -93,6 +93,7 @@ function obtenerPedidos() {
                 datoAcciones.appendChild(botonEliminar)
 
                 botonEliminar.addEventListener('click', function (event) {
+
                     Swal.fire({
                         title: "¿Desea eliminar el pedido?",
                         showCancelButton: true,
@@ -103,6 +104,7 @@ function obtenerPedidos() {
                             eliminarPedido(registro.id_pedido);
                         }
                     });
+
                 })
 
 

@@ -143,10 +143,21 @@ function obtenerClientes(busqueda = "") {
                 botonEliminar.innerHTML = '<i class="fas fa-trash text-danger"></i>'
 
                 botonEliminar.addEventListener('click', function () {
-                    if (window.confirm("¿Desea eliminar el registro?")) {
+                    Swal.fire({
+                        title: "¿Desea eliminar el cliente?",
+                        showCancelButton: true,
+                        confirmButtonText: "Confirmar",
+                        confirmButtonColor: "#1952A0"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            eliminarCliente(registro.id_pedido);
+                        }
+                    });
 
-                        eliminarCliente(registro.id_cliente);
-                    }
+                    // if (window.confirm("¿Desea eliminar el registro?")) {
+
+                    //     eliminarCliente(registro.id_cliente);
+                    // }
                     // window.location.href = '#titulo'
                 });
 
@@ -184,11 +195,19 @@ function obtenerClientes(busqueda = "") {
 function eliminarCliente(id) {
     axios.delete('http://localhost:3000/clientes/' + id)
         .then(respuesta => {
-            alert("Cliente eliminado");
+            Swal.fire({
+                text: "Cliente eliminado correctamente",
+                icon: "success",
+                confirmButtonColor: "#1952A0"
+            });
             obtenerClientes();
         })
         .catch(error => {
-            console.error('Hubo un problema con la solicitud:', error);
+            Swal.fire({
+                text: "Ocurrio un error al eliminar cliente",
+                icon: "error",
+                confirmButtonColor: "#1952A0"
+            });
         });
 }
 

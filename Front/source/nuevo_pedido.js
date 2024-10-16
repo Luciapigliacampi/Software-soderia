@@ -75,7 +75,7 @@ function obtenerProductos() {
                 const option = document.createElement('option');
 
                 option.value = registro.id_producto
-                option.textContent = registro.nombre
+                option.textContent = `${registro.nombre} - ${registro.volumen}`
                 option.setAttribute("data-max", registro.stock)
                 option.setAttribute("data-importe", registro.importe_unitario)
 
