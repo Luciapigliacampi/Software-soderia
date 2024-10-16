@@ -88,7 +88,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (2,'Lucia','Pigliacampi','3534186520','Dario Ramonda',14,1,NULL,1,1,38021921,1,1860,NULL,NULL,NULL),(3,'Franco','Serra','3534206286','Corrientes',17,1,NULL,1,1,35638284,1,3076,NULL,NULL,NULL),(4,'Hugo','Pigliacampi','3534147796','Mendoza',17,1,NULL,1,1,41411191,1,644,1,'B',NULL),(5,'Adriana','Molina 2','68','Dario Ramonda',25,1,'',1,1,14665938,1,1860,NULL,'',1),(8,'Elias','Pigliacampi','3534614233','Mendoza',25,1,'',1,1,43604611,1,642,NULL,'',1),(10,'Hugo','Pigliacampi','3534114664','Dario Ramonda',14,1,'',1,1,13136121,1,1860,NULL,'',1),(11,'Paulina','Pigliacampi','35348756','Catamarca',15,1,'',1,1,39875909,1,385,NULL,'',1),(14,'mnb mn','bnvcbn','5454','sdfxdf',25,1,'',1,1,38021922,1,54,NULL,'',1),(18,'Lucía Antonella','Pigliacampi','03534186520','Mendoza',25,1,'lucia.pigliacampi90@gmail.com',1,1,43604610,1,642,NULL,'',1),(19,'Franco Gaston','Serra','03534186520','Dario Ramonda',25,1,'',1,1,35638287,1,1860,NULL,'',1),(20,'Adriana','Molina','123213','Dario Ramonda',25,1,'',1,1,14256256,1,1860,NULL,'',1);
+INSERT INTO `cliente` VALUES (2,'Lucia','Pigliacampi','3534186520','Dario Ramonda',14,1,NULL,1,1,38021921,1,1860,NULL,NULL,NULL),(3,'Franco','Serra','3534206286','Corrientes',17,1,NULL,1,1,35638284,1,3076,NULL,NULL,NULL),(4,'Hugo','Pigliacampi','3534147796','Mendoza',17,1,NULL,1,1,41411191,1,644,1,'B',NULL),(5,'Rramon','Molina 2','68','Dario Ramonda',25,1,'',1,1,14665938,0,1860,NULL,'',1),(8,'Elias','Pigliacampi','3534614233','Mendoza',25,1,'',1,1,43604611,1,642,NULL,'',1),(10,'Hugo','Pigliacampi','3534114664','Dario Ramonda',14,1,'',1,1,13136121,1,1860,NULL,'',1),(11,'Paulina','Pigliacampi','35348756','Catamarca',15,1,'',1,1,39875909,1,385,NULL,'',1),(14,'mnb mn','bnvcbn','5454','sdfxdf',25,1,'',1,1,38021922,1,54,NULL,'',1),(18,'Lucía Antonella','Pigliacampi','03534186520','Mendoza',25,1,'lucia.pigliacampi90@gmail.com',1,1,43604610,1,642,NULL,'',1),(19,'Franco Gaston','Serra','03534186520','Dario Ramonda',25,1,'',1,1,35638287,1,1860,NULL,'',1),(20,'Adriana','Molina','123213','Dario Ramonda',25,1,'',1,1,14256256,0,1860,NULL,'',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,10 +349,12 @@ CREATE TABLE `pedido` (
   `fecha_real_entrega` date DEFAULT NULL,
   `total` decimal(10,2) NOT NULL,
   `dia_entrega` int NOT NULL,
+  `subtotal` decimal(15,2) DEFAULT NULL,
+  `iva` decimal(15,2) DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
   KEY `fk_id_cliente` (`id_cliente`),
   CONSTRAINT `fk_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,7 +363,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,'2024-10-01 00:00:00',2,'0','2024-10-02',NULL,1505.50,0),(5,'2024-10-15 09:19:27',5,'0','2024-10-24',NULL,847.00,0),(6,'2024-10-15 09:24:49',8,'1','2024-10-18',NULL,1573.00,0),(7,'2024-10-15 09:25:40',10,'1','2024-10-26',NULL,907.50,0),(8,'2024-10-15 09:27:40',3,'1','2024-10-30',NULL,3085.50,0);
+INSERT INTO `pedido` VALUES (1,'2024-10-01 00:00:00',2,'0','2024-10-02',NULL,1505.50,0,NULL,NULL),(5,'2024-10-15 09:19:27',5,'0','2024-10-24',NULL,847.00,0,NULL,NULL),(6,'2024-10-15 09:24:49',8,'0','2024-10-18',NULL,1573.00,0,NULL,NULL),(7,'2024-10-15 09:25:40',10,'0','2024-10-26',NULL,907.50,0,NULL,NULL),(8,'2024-10-15 09:27:40',3,'0','2024-10-30',NULL,3085.50,0,NULL,NULL),(9,'2024-10-15 23:26:00',8,'1','2024-10-17',NULL,2722.50,0,2250.00,472.50);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +392,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Soda 500ml','500ml',5,'1',1,350.00),(2,'Agua Mineral 1/2','500ml',20,'1',2,250.00),(3,'Agua 1lt','1000ml',0,'1',2,400.00);
+INSERT INTO `producto` VALUES (1,'Soda','500ml',5,'1',1,350.00),(2,'Agua Mineral','500ml',20,'1',2,250.00),(3,'Agua','1000ml',10,'1',2,400.00);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,7 +451,7 @@ CREATE TABLE `productoxpedido` (
 
 LOCK TABLES `productoxpedido` WRITE;
 /*!40000 ALTER TABLE `productoxpedido` DISABLE KEYS */;
-INSERT INTO `productoxpedido` VALUES (1,6,3,'1',350.00,1050.00),(1,8,3,'1',350.00,1050.00),(2,6,1,'1',250.00,250.00),(2,7,3,'1',250.00,750.00),(2,8,6,'1',250.00,1500.00);
+INSERT INTO `productoxpedido` VALUES (1,6,3,'1',350.00,1050.00),(1,8,3,'1',350.00,1050.00),(1,9,5,'1',350.00,1750.00),(2,6,1,'1',250.00,250.00),(2,7,3,'1',250.00,750.00),(2,8,6,'1',250.00,1500.00),(2,9,2,'1',250.00,500.00);
 /*!40000 ALTER TABLE `productoxpedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -731,4 +733,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-15  9:40:37
+-- Dump completed on 2024-10-15 23:32:02

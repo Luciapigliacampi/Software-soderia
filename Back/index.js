@@ -212,7 +212,7 @@ app.get('/pedidos', (req, res) => {
 app.post('/pedidos', (req, res) => {
   const {cliente,detalle,subtotal,total,iva,fecha_entrega,estado} = req.body;
 
-  connection.query('INSERT INTO pedido (fecha,id_cliente,estado,fecha_estimada_entrega,total) VALUES (Now(),?,?,?,?)',[cliente,estado,fecha_entrega,total], (err, results) => {
+  connection.query('INSERT INTO pedido (fecha,id_cliente,estado,fecha_estimada_entrega,total,subtotal,iva) VALUES (Now(),?,?,?,?,?,?)',[cliente,estado,fecha_entrega,total,subtotal,iva], (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }
@@ -242,6 +242,40 @@ app.delete('/pedidos/:id_pedido', (req, res) => {
       return res.status(200).json(results);
   });
 })
+
+app.get('/pedidos/:id_pedido', (req, res) => {
+  const id_pedido = req.params.id_pedido;
+
+  let objetoRespuesta = {
+    cliente: "",
+    estado: "",
+    subtotal: 0,
+    iva: 0,
+    total: 0,
+    detalle: []
+  }
+
+  connection.query(`SELECT p.*, c.numero_documento, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c ON p.id_cliente = c.id_cliente WHERE p.id_pedido = ${id_pedido}`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      objetoRespuesta.cliente = results[0].nombre_cliente
+      objetoRespuesta.estado = results[0].estado
+      objetoRespuesta.subtotal = results[0].subtotal
+      objetoRespuesta.iva = results[0].iva
+      objetoRespuesta.total = results[0].total
+      connection.query(`SELECT d.*, p.nombre, p.volumen FROM productoxpedido as d INNER JOIN producto as p ON p.id_producto = d.id_producto WHERE d.id_pedido = ${id_pedido}`, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        objetoRespuesta.detalle = results
+
+        return res.status(200).json(objetoRespuesta);
+    });
+  });
+});
+
 
 // app.put('/cliente', (req, res) => {
 //   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;

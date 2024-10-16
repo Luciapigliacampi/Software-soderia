@@ -131,8 +131,8 @@ function obtenerClientes(busqueda = "") {
                 datoBarrio.textContent = registro.nombre_barrio;
                 let datoLocalidad = document.createElement('td');
                 datoLocalidad.textContent = registro.nombre_localidad;
-                let datoEmail = document.createElement('td');
-                datoEmail.textContent = registro.correo_electronico;
+                // let datoEmail = document.createElement('td');
+                // datoEmail.textContent = registro.correo_electronico;
                 let datoTipoCliente = document.createElement('td');
                 datoTipoCliente.textContent = registro.nombre_tipo_cliente;
                 let acciones = document.createElement('td');
@@ -169,7 +169,6 @@ function obtenerClientes(busqueda = "") {
                 filaTabla.appendChild(datoDireccion);
                 filaTabla.appendChild(datoBarrio);
                 filaTabla.appendChild(datoLocalidad);
-                filaTabla.appendChild(datoEmail);
                 filaTabla.appendChild(datoTipoCliente);
                 filaTabla.appendChild(acciones);
 
