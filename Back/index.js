@@ -38,7 +38,6 @@ app.get('/clientes', (req, res) => {
 
   console.log(filtroBusqueda);
   
-  
   connection.query('SELECT c.*, b.nombre as nombre_barrio, l.nombre as nombre_localidad, t.nombre as nombre_tipo_cliente, td.nombre as nombre_tipo_documento FROM cliente as c inner join barrio as b on b.id_barrio = c.id_barrio inner join localidad as l on l.id_localidad = c.id_localidad inner join tipocliente as t on t.id_tipo_cliente = c.id_tipo_cliente inner join tipodocumento as td on td.id_tipo_documento = c.id_tipo_documento WHERE c.estado=1 ' + filtroBusqueda + ' ORDER BY c.nombre asc', (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
@@ -284,132 +283,7 @@ app.post('/login', (req, res) => {
 
   return res.status(200).json(datos);
   
-  // connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente WHERE p.estado <> 0 ORDER BY p.id_pedido desc`, (err, results) => {
-  //     if (err) {
-  //         return res.status(500).json({ error: err.message });
-  //     }
-  //     res.status(200).json(results);
-  // });
 });
-
-
-// app.put('/cliente', (req, res) => {
-//   const { nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento } = req.body;
-//   connection.query(
-//       'UPDATE cliente SET nombre=?, apellido=?, telefono=?, direccion=?, id_barrio=?, id_localidad=?, correo_electronico=?, id_tipo_cliente=?, id_tipo_documento=?, numero_documento=?, estado=? WHERE id_cliente=?',
-//       [nombre, apellido, telefono, direccion, id_barrio, id_localidad, correo_electronico, id_tipo_cliente, id_tipo_documento, numero_documento],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
-
-
-
-// app.post('/producto', (req, res) => {
-//   const { nombre, volumen, stock, id_tipo_producto } = req.body;
-//   connection.query(
-//       'INSERT INTO producto (nombre, volumen, stock, id_tipo_producto) VALUES (?, ?, ?, ?)',
-//       [nombre, volumen, stock, id_tipo_producto],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
-
-// app.put('/producto', (req, res) => {
-//   const { nombre, volumen, stock, id_tipo_producto } = req.body;
-//   connection.query(
-//       'UPDATE producto SET nombre=?, volumen=?, stock=?, id_tipo_producto=?, estado=? WHERE id_producto=?',
-//       [nombre, volumen, stock, id_tipo_producto],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
-
-// app.get('/pedido', (req, res) => {
-//   connection.query('SELECT * FROM pedido', (err, results) => {
-//       if (err) {
-//           return res.status(500).json({ error: err.message });
-//       }
-//       res.json(results);
-//   });
-// });
-
-// app.post('/pedido', (req, res) => {
-//   const { fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega } = req.body;
-//   connection.query(
-//       'INSERT INTO pedido (fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega) VALUES (?, ?)',
-//       [fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
-
-// app.put('/pedido', (req, res) => {
-//   const { fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega } = req.body;
-//   connection.query(
-//       'UPDATE pedido SET fecha=?, id_cliente=?, fecha_estimada_entrega=?, fecha_real_entrega=?, estado=? WHERE id=?',
-//       [fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
-
-// app.get('/productoxpedido', (req, res) => {
-//   connection.query('SELECT * FROM productoxpedido', (err, results) => {
-//       if (err) {
-//           return res.status(500).json({ error: err.message });
-//       }
-//       res.json(results);
-//   });
-// });
-
-// app.post('/productoxpedido', (req, res) => {
-//   const { fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega } = req.body;
-//   connection.query(
-//       'INSERT INTO productoxpedido (id_producto, id_pedido, cantidad) VALUES (?, ?)',
-//       [fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
-
-// app.put('/productoxpedido', (req, res) => {
-//   const { id_producto, id_pedido, cantidad } = req.body;
-//   connection.query(
-//       'UPDATE productoxpedido SET id_producto=?, id_pedido=?, cantidad=? WHERE id_producto=? AND id_pedido=?',
-//       [fecha, id_cliente, fecha_estimada_entrega, fecha_real_entrega],
-//       (err, results) => {
-//           if (err) {
-//               return res.status(500).json({ error: err.message });
-//           }
-//           res.status(201).json({ id: results.insertId });
-//       }
-//   );
-// });
 
 const PORT = 3000;
 app.listen(PORT, () => {

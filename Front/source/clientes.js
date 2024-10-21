@@ -11,75 +11,6 @@ textoBusqueda.addEventListener('input', (event) => {
     
 })
 
-// function eliminarUsuario(codigo) {
-//     console.log(typeof codigo);
-
-//     axios.delete('http://localhost:3000/data/' + codigo)
-//         .then(respuesta => {
-//             alert("Usuario Eliminado");
-//             obtenerUsuarios();
-//         })
-//         .catch(error => {
-//             console.error('Hubo un problema con la solicitud:', error);
-//         });
-// }
-
-// function agregarUsuario(id, nombre, apellido, edad, ciudad) {
-//     axios.post('http://localhost:3000/data/', {
-//         "id": Number(id),
-//         "nombre": nombre,
-//         "apellido": apellido,
-//         "edad": edad,
-//         "ciudad": ciudad
-//     })
-//         .then(respuesta => {
-//             console.log('Usuario agregado con éxito:', respuesta.data);
-//             obtenerUsuarios();
-//         })
-//         .catch(error => {
-//             console.error('Hubo un problema con la solicitud:', error);
-//         });
-// }
-
-// let id = document.getElementById("idPersona");
-// let idActual = document.getElementById("idActual");
-// let nombre = document.getElementById("nombre");
-// let apellido = document.getElementById("apellido");
-// let edad = document.getElementById("edad");
-// let ciudad = document.getElementById("ciudad");
-
-// function datosFormulario(registroConsultado) {
-//     nombre.value = registroConsultado.nombre
-//     id.value = registroConsultado.id;
-//     idActual.value = registroConsultado.id;
-//     apellido.value = registroConsultado.apellido;
-//     edad.value = registroConsultado.edad;
-//     ciudad.value = registroConsultado.ciudad;
-// }
-
-// function habilitarFormulario() {
-//     nombre.disabled = false;
-//     id.disabled = true;
-//     apellido.disabled = false;
-//     edad.disabled = false;
-//     ciudad.disabled = false;
-// }
-
-// function consultarDatos(registroConsultado) {
-//     datosFormulario(registroConsultado)
-//     nombre.disabled = true;
-//     id.disabled = true;
-//     apellido.disabled = true;
-//     edad.disabled = true;
-//     ciudad.disabled = true;
-// }
-
-// function modificarDatos(registroConsultado) {
-//     datosFormulario(registroConsultado)
-//     habilitarFormulario()
-
-// }
-
 function obtenerClientes(busqueda = "") {
     let filtro = ""
     if(busqueda == "") {
@@ -92,9 +23,6 @@ function obtenerClientes(busqueda = "") {
 
             let datos = respuesta.data;
 
-            console.log(datos);
-
-
             let tablaClientes = document.getElementById("tablaClientes");
             tablaClientes.innerHTML = "";
 
@@ -105,6 +33,7 @@ function obtenerClientes(busqueda = "") {
 
                 let datoNombre = document.createElement('td');
                 datoNombre.textContent = `${registro.nombre} ${registro.apellido}`;
+                
                 let datoTelefono = document.createElement('td');
                 datoTelefono.textContent = registro.telefono;
 
@@ -131,8 +60,6 @@ function obtenerClientes(busqueda = "") {
                 datoBarrio.textContent = registro.nombre_barrio;
                 let datoLocalidad = document.createElement('td');
                 datoLocalidad.textContent = registro.nombre_localidad;
-                // let datoEmail = document.createElement('td');
-                // datoEmail.textContent = registro.correo_electronico;
                 let datoTipoCliente = document.createElement('td');
                 datoTipoCliente.textContent = registro.nombre_tipo_cliente;
                 let acciones = document.createElement('td');
@@ -150,15 +77,9 @@ function obtenerClientes(busqueda = "") {
                         confirmButtonColor: "#1952A0"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            eliminarCliente(registro.id_pedido);
+                            eliminarCliente(registro.id_cliente);
                         }
                     });
-
-                    // if (window.confirm("¿Desea eliminar el registro?")) {
-
-                    //     eliminarCliente(registro.id_cliente);
-                    // }
-                    // window.location.href = '#titulo'
                 });
 
                 let botonModificar = document.createElement('button');
@@ -169,7 +90,6 @@ function obtenerClientes(busqueda = "") {
 
                 botonModificar.addEventListener('click', function (event) {
                     obtenerCliente(registro.id_cliente)
-
                 })
 
                 acciones.appendChild(botonEliminar);
@@ -185,7 +105,6 @@ function obtenerClientes(busqueda = "") {
 
                 tablaClientes.appendChild(filaTabla);
             }
-
         })
         .catch(error => {
             console.error('Hubo un problema con la solicitud:', error);
