@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bubblify</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="tempusdominus-bootstrap-4.css">
@@ -211,8 +212,9 @@
                           </a>
 
                         </div>
-                        
-                        <input type="text" name="table_search" id="textoBusqueda" class="form-control float-right" placeholder="Buscar por nombre">
+
+                        <input type="text" name="table_search" id="textoBusqueda" class="form-control float-right"
+                          placeholder="Buscar por nombre">
                         <div class="input-group-append">
                           <button type="button" class="btn" id="botonBuscar">
                             <i class="fas fa-search"></i>
@@ -253,121 +255,112 @@
 
         <form action="" id="formulario">
 
-        <div class="modal-body">
+          <div class="modal-body">
 
-          <div class="">
             <div class="row">
               <div class="col-md-12">
-                <div class="">
-                  
-                    <input type="text" id="idCliente" hidden>
-                    <div class="card-body">
-                      <div class="form-group row">
-                        <div class="col-12">
-                          <label for="datosContacto">Datos personales</label>
-                        </div>
-
-                        <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
-                          <input type="text" class="form-control" id="nombre" placeholder="Nombre/Razón social"
-                            name="nombre">
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
-                          <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-md-3 col-lg-2">
-                          <select class="form-control" id="tipoDocumento" name="tipoDocumento">
-                            <option value="">Tipo de documento</option>
-                          </select>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3 mb-md-0">
-                          <input type="number" class="form-control" id="numeroDoc" name="numeroDoc"
-                            placeholder="Número">
-                        </div>
-
-                        <div class="col-sm-12 col-md-5 col-lg-7">
-                          <select class="form-control" id="condicionIVA" name="condicionIVA">
-                            <option value="">Cond. frente al IVA</option>
-                          </select>
-                        </div>
-
-                      </div>
-
-                      <div class="form-group row">
-                        <div class="col-12">
-                          <label for="telefono">Datos de contacto</label>
-                        </div>
-                        <div class="col-5 col-lg-4">
-                          <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono">
-                        </div>
-                        <div class="col-7 col-lg-8">
-                          <input type="text" class="form-control" placeholder="E-mail" id="email" name="email">
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <div class="col-12">
-                          <label for="direccion">Dirección</label>
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-6 mb-3">
-                          <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle">
-                        </div>
-                        <div class="col-4 col-md-4 col-lg-2">
-                          <input type="number" class="form-control" id="numeroDir" name="numeroDir"
-                            placeholder="Número">
-                        </div>
-                        <div class="col-4 col-md-4 col-lg-2 mb-3">
-                          <input type="text" class="form-control" id="piso" name="piso" placeholder="Piso">
-                        </div>
-                        <div class="col-4 col-md-4 col-lg-2">
-                          <input type="text" class="form-control" id="departamento" name="departamento"
-                            placeholder="Dpto">
-                        </div>
-
-                        <div class="col-12 col-md-7 mb-3 mb-md-0">
-                          <select class="form-control" id="localidad" name="localidad">
-                            <option value="">Localidad</option>
-                          </select>
-                        </div>
-
-
-                        <div class="col-12 col-md-5">
-                          <select class="form-control" id="barrio" name="barrio">
-                            <option value="">Barrio</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <div class="col-12">
-                          <label for="tipoCliente">Tipo de cliente</label>
-                        </div>
-                        <div class="col-5">
-                          <select id="tipoCliente" name="tipoCliente" class="form-control">
-                          </select>
-                        </div>
-                        <div class="col-6"></div>
-
-
-                      </div>
-
+                <input type="text" id="idCliente" hidden>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <label for="datosContacto">Datos personales</label>
                     </div>
 
+                    <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
+                      <input type="text" class="form-control" id="nombre" placeholder="Nombre/Razón social"
+                        name="nombre">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
+                      <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
+                    </div>
 
+                    <div class="col-6 col-sm-6 col-md-3 col-lg-2">
+                      <select class="form-control" id="tipoDocumento" name="tipoDocumento">
+                        <option value="">Tipo de documento</option>
+                      </select>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3 mb-md-0">
+                      <input type="number" class="form-control" id="numeroDoc" name="numeroDoc" placeholder="Número">
+                    </div>
+
+                    <div class="col-sm-12 col-md-5 col-lg-7">
+                      <select class="form-control" id="condicionIVA" name="condicionIVA">
+                        <option value="">Cond. frente al IVA</option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <label for="telefono">Datos de contacto</label>
+                    </div>
+                    <div class="col-5 col-lg-4">
+                      <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono">
+                    </div>
+                    <div class="col-7 col-lg-8">
+                      <input type="text" class="form-control" placeholder="E-mail" id="email" name="email">
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <label for="direccion">Dirección</label>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-6 mb-3">
+                      <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle">
+                    </div>
+                    <div class="col-4 col-md-4 col-lg-2">
+                      <input type="number" class="form-control" id="numeroDir" name="numeroDir" placeholder="Número">
+                    </div>
+                    <div class="col-4 col-md-4 col-lg-2 mb-3">
+                      <input type="text" class="form-control" id="piso" name="piso" placeholder="Piso">
+                    </div>
+                    <div class="col-4 col-md-4 col-lg-2">
+                      <input type="text" class="form-control" id="departamento" name="departamento" placeholder="Dpto">
+                    </div>
+
+                    <div class="col-12 col-md-7 mb-3 mb-md-0">
+                      <select class="form-control" id="localidad" name="localidad">
+                        <option value="">Localidad</option>
+                      </select>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                      <select class="form-control" id="barrio" name="barrio">
+                        <option value="">Barrio</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <div class="col-12">
+                      <label for="tipoCliente">Tipo de cliente</label>
+                    </div>
+                    <div class="col-5">
+                      <select id="tipoCliente" name="tipoCliente" class="form-control">
+                      </select>
+                    </div>
+                    <div class="col-6"></div>
+                  </div>
+                  <div id="contenedorErrores">
+                  </div>
                 </div>
-
+                
               </div>
-
-              </section>
+              
             </div>
+           
           </div>
 
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        </div>
-      </form>
+
+
+
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

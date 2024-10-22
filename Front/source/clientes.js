@@ -149,6 +149,11 @@ let tipoCliente = document.getElementById('tipoCliente');
 formulario.addEventListener("submit", validarDatos);
 
 function obtenerCliente(id) {
+
+    let contenedorErrores = document.getElementById("contenedorErrores");
+
+    contenedorErrores.innerHTML = "";
+    
     obtenerLocalidades()
 
     obtenerTipoDoc();
@@ -190,11 +195,7 @@ function obtenerLocalidades() {
 
     axios.get('http://localhost:3000/localidades')
         .then(respuesta => {
-
             let datos = respuesta.data;
-
-            console.log(datos);
-
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -205,8 +206,6 @@ function obtenerLocalidades() {
                 option.textContent = registro.nombre
 
                 selectLocalides.appendChild(option)
-
-
 
             }
 
@@ -220,8 +219,6 @@ let selectBarrios = document.getElementById("barrio");
 
 selectLocalides.addEventListener("change", function () {
     const id_localidad = this.value
-
-    
 
     if (id_localidad == "") {
         return
@@ -237,11 +234,6 @@ function obtenerBarrios(id_localidad,id_barrio=0) {
         .then(respuesta => {
 
             let datos = respuesta.data;
-
-            console.log(datos);
-
-
-
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -273,8 +265,6 @@ function obtenerTipoDoc() {
 
             let datos = respuesta.data;
 
-            console.log(datos);
-
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
 
@@ -300,8 +290,6 @@ function obtenerCondicionIVA() {
         .then(respuesta => {
 
             let datos = respuesta.data;
-
-            console.log(datos);
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -329,8 +317,6 @@ function obtenerTipoCliente() {
         .then(respuesta => {
 
             let datos = respuesta.data;
-
-            console.log(datos);
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -410,25 +396,20 @@ function validarDatos(event) {
         errores.push("*Barrio es requerido");
     }
 
-
-
-    // contenedorErrores.innerHTML = "";
-
-
-
-    // if (errores.length > 0) {
-
-    //     errores.forEach(function (item, index) {
-    //         parrafo = document.createElement('p');
-    //         contenedorErrores.appendChild(parrafo);
-    //         parrafo.textContent = item;
-    //         parrafo.classList.add("mb-1")
-    //     });
-    //     return
-    // }
-
-
     let selectLocalides = document.getElementById("localidad");
+
+    contenedorErrores.innerHTML = "";
+
+    if (errores.length > 0) {
+
+        errores.forEach(function (item, index) {
+            parrafo = document.createElement('p');
+            contenedorErrores.appendChild(parrafo);
+            parrafo.textContent = item;
+            parrafo.classList.add("mb-1")
+        });
+        return
+    }
 
     const cliente = crearObjeto()
     console.log(cliente);
@@ -554,7 +535,5 @@ function crearObjeto() {
         id_condicion: condicionIVA.value == "" ? 1:condicionIVA.value
     }
 
-
     return contenidoFormulario
-
 }

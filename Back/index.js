@@ -136,10 +136,7 @@ app.post('/clientes', (req, res) => {
         }
     );
       }
-      
-  });
-  
-  
+  });  
 });
 
 app.delete('/clientes/:id_cliente', (req, res) => {

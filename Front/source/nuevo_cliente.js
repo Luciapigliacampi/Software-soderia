@@ -6,9 +6,6 @@ function obtenerLocalidades() {
 
             let datos = respuesta.data;
 
-            console.log(datos);
-
-
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
 
@@ -18,11 +15,7 @@ function obtenerLocalidades() {
                 option.textContent = registro.nombre
 
                 selectLocalides.appendChild(option)
-
-
-
             }
-
         })
         .catch(error => {
             console.error('Hubo un problema con la solicitud:', error);
@@ -39,7 +32,7 @@ selectLocalides.addEventListener("change", function () {
     if (id_localidad == "") {
         return
     }
-
+    
     obtenerBarrios(id_localidad)
 })
 
@@ -48,11 +41,6 @@ function obtenerBarrios(id_localidad) {
         .then(respuesta => {
 
             let datos = respuesta.data;
-
-            console.log(datos);
-
-
-
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -64,7 +52,6 @@ function obtenerBarrios(id_localidad) {
 
                 selectBarrios.appendChild(option)
             }
-
         })
         .catch(error => {
             console.error('Hubo un problema con la solicitud:', error);
@@ -80,8 +67,6 @@ function obtenerTipoDoc() {
         .then(respuesta => {
 
             let datos = respuesta.data;
-
-            console.log(datos);
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -109,8 +94,6 @@ function obtenerCondicionIVA() {
         .then(respuesta => {
 
             let datos = respuesta.data;
-
-            console.log(datos);
 
             for (let indice = 0; indice < datos.length; indice++) {
                 let registro = datos[indice];
@@ -205,7 +188,6 @@ function validarDatos(event) {
         console.log("número documento vacio")
         errores.push("*Número documento es requerido, si desconoce el dato, ingrese 0");
     } 
-    
 
     if (telefono.value.trim() == "") {
         console.log("teléfono vacio")
@@ -237,11 +219,7 @@ function validarDatos(event) {
         errores.push("*Barrio es requerido");
     }
 
-
-
     contenedorErrores.innerHTML = "";
-
-
 
     if (errores.length > 0) {
 
@@ -253,7 +231,6 @@ function validarDatos(event) {
         });
         return
     }
-
 
     let selectLocalides = document.getElementById("localidad");
 
@@ -276,7 +253,6 @@ function validarDatos(event) {
                 alert(error.message)
             }
         });
-
 }
 
 
