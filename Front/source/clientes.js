@@ -149,12 +149,11 @@ let tipoCliente = document.getElementById('tipoCliente');
 formulario.addEventListener("submit", validarDatos);
 
 function obtenerCliente(id) {
-
     let contenedorErrores = document.getElementById("contenedorErrores");
 
     contenedorErrores.innerHTML = "";
     
-    obtenerLocalidades()
+    obtenerLocalidades();
 
     obtenerTipoDoc();
 
@@ -431,90 +430,6 @@ function validarDatos(event) {
             }
         });
 }
-
-// let botonGuardar = document.getElementById("botonGuardar");
-
-// botonGuardar.addEventListener('click', function (event) {
-//     event.preventDefault()
-
-//     axios.get('http://localhost:3000/data')
-//         .then(respuesta => {
-
-//             let datos = respuesta.data;
-
-//             let resultado = datos.find(Persona => Persona.id == id.value)
-
-//             if (resultado) {
-//                 alert("El id ya fue ingresado")
-//             } else {
-//                 agregarUsuario(id.value, nombre.value, apellido.value, edad.value, ciudad.value)
-//                 alert("Usuario guardado con éxito")
-//             }
-//         })
-//         .catch(error => {
-//             console.error('Error al obtener los datos:', error);
-//         });
-
-// })
-
-// function modificarUsuario(idActual, id, nombre, apellido, edad, ciudad) {
-
-//     axios.put('http://localhost:3000/data/' + idActual, {
-//         "id": Number(id),
-//         "nombre": nombre,
-//         "apellido": apellido,
-//         "edad": edad,
-//         "ciudad": ciudad
-//     })
-//         .then(respuesta => {
-//             console.log('Usuario modificado con éxito:', respuesta.data);
-//             alert("Usuario modificado con éxito");
-//             obtenerUsuarios();
-//         })
-//         .catch(error => {
-//             console.error('Hubo un problema con la solicitud:', error);
-//         });
-// }
-
-// let botonActualizar = document.getElementById("botonActualizar");
-
-// botonActualizar.addEventListener('click', function (event) {
-//     event.preventDefault()
-
-//     if (idActual.value == id.value) {
-//         modificarUsuario(idActual.value, id.value, nombre.value, apellido.value, edad.value, ciudad.value)
-//     }
-//     else {
-//         axios.get('http://localhost:3000/data')
-//             .then(respuesta => {
-
-//                 let datos = respuesta.data;
-
-//                 let resultado = datos.find(Persona => Persona.id == id.value)
-
-//                 if (resultado) {
-//                     alert("El id ya fue ingresado")
-//                 } else {
-//                     modificarUsuario(idActual.value, id.value, nombre.value, apellido.value, edad.value, ciudad.value)
-//                 }
-//             })
-//             .catch(error => {
-//                 console.error('Error al obtener los datos:', error);
-//             });
-
-//     }
-//     window.location.href = '#titulo'
-
-// })
-
-// let botonLimpiar = document.getElementById('botonLimpiar');
-
-// botonLimpiar.addEventListener('click', function () {
-//     habilitarFormulario()
-//     botonGuardar.disabled = false;
-//     botonActualizar.disabled = true;
-//     id.disabled = false;
-// })
 
 function crearObjeto() {
     let contenidoFormulario = {

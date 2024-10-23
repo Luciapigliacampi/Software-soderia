@@ -7,7 +7,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-
 const connection = mysql2.createConnection({
 host: 'localhost',
 user: 'root',
@@ -22,7 +21,6 @@ return;
 }
 console.log('Conectado a la base de datos MySQL');
 });
-
 
 app.get('/', (req, res) => {
   res.send('API Funcionando OK');
@@ -45,7 +43,6 @@ app.get('/clientes', (req, res) => {
       res.status(200).json(results);
   });
 });
-
 
 app.get('/localidades', (req, res) => {
   connection.query('SELECT id_localidad, nombre FROM localidad ORDER BY nombre asc', (err, results) => {
