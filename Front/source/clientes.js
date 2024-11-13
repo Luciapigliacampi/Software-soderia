@@ -1,4 +1,8 @@
-obtenerClientes();
+const selectEstado = document.getElementById("selectEstado")
+selectEstado.addEventListener('change', (event) => {
+    event.preventDefault();
+    obtenerClientes(textoBusqueda.value, selectEstado.value);
+})
 
 const textoBusqueda = document.getElementById("textoBusqueda");
 let retardoEspera = null;
@@ -6,18 +10,33 @@ textoBusqueda.addEventListener('input', (event) => {
     event.preventDefault();
     clearTimeout(retardoEspera);
     retardoEspera = setTimeout(() => {
-        obtenerClientes(textoBusqueda.value)
+        obtenerClientes(textoBusqueda.value, selectEstado.value)
     }, 300); 
     
 })
 
-function obtenerClientes(busqueda = "") {
+obtenerClientes(textoBusqueda.value, selectEstado.value);
+
+function obtenerClientes(busqueda = "", estado = "") {
     let filtro = ""
+    
     if(busqueda == "") {
         filtro = ""
     } else {
         filtro = `?buscar=${busqueda}`
     }
+
+    
+    
+
+    if(estado != "") {
+        if(filtro == "") {
+            filtro += `?estado=${estado}`
+        } else {
+            filtro += `&estado=${estado}`
+        }
+    }
+
     axios.get(`http://localhost:3000/clientes${filtro}`)
         .then(respuesta => {
 
@@ -119,7 +138,7 @@ function eliminarCliente(id) {
                 icon: "success",
                 confirmButtonColor: "#1952A0"
             });
-            obtenerClientes();
+            obtenerClientes(textoBusqueda.value,selectEstado.value);
         })
         .catch(error => {
             Swal.fire({
