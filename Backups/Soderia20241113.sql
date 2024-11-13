@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: soderia
 -- ------------------------------------------------------
--- Server version	8.2.0
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -348,13 +348,14 @@ CREATE TABLE `pedido` (
   `fecha_estimada_entrega` date DEFAULT NULL,
   `fecha_real_entrega` date DEFAULT NULL,
   `total` decimal(10,2) NOT NULL,
-  `dia_entrega` int NOT NULL,
+  `dia_entrega` int DEFAULT NULL,
   `subtotal` decimal(15,2) DEFAULT NULL,
   `iva` decimal(15,2) DEFAULT NULL,
+  `estado_pedido` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_pedido`),
   KEY `fk_id_cliente` (`id_cliente`),
   CONSTRAINT `fk_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +364,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
-INSERT INTO `pedido` VALUES (1,'2024-10-01 00:00:00',2,'0','2024-10-02',NULL,1505.50,0,NULL,NULL),(5,'2024-10-15 09:19:27',5,'0','2024-10-24',NULL,847.00,0,NULL,NULL),(6,'2024-10-15 09:24:49',8,'0','2024-10-18',NULL,1573.00,0,NULL,NULL),(7,'2024-10-15 09:25:40',10,'0','2024-10-26',NULL,907.50,0,NULL,NULL),(8,'2024-10-15 09:27:40',3,'0','2024-10-30',NULL,3085.50,0,NULL,NULL),(9,'2024-10-15 23:26:00',8,'1','2024-10-17',NULL,2722.50,0,2250.00,472.50);
+INSERT INTO `pedido` VALUES (1,'2024-10-01 00:00:00',2,'1','2024-10-02',NULL,1505.50,0,1244.22,261.28,5),(5,'2024-10-15 09:19:27',5,'1','2024-10-24',NULL,847.00,0,700.00,147.00,4),(6,'2024-10-15 09:24:49',8,'1','2024-10-18',NULL,1573.00,0,1300.00,273.00,3),(7,'2024-10-15 09:25:40',10,'1','2024-10-26',NULL,907.50,0,750.00,157.50,2),(8,'2024-10-15 09:27:40',3,'0','2024-10-30',NULL,3085.50,0,2550.00,535.50,2),(9,'2024-10-15 23:26:00',8,'1','2024-10-17',NULL,2722.50,0,2250.00,472.50,1),(10,'2024-11-13 16:31:06',11,'1','2024-11-16',NULL,2783.00,NULL,2300.00,483.00,1);
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,7 +452,7 @@ CREATE TABLE `productoxpedido` (
 
 LOCK TABLES `productoxpedido` WRITE;
 /*!40000 ALTER TABLE `productoxpedido` DISABLE KEYS */;
-INSERT INTO `productoxpedido` VALUES (1,6,3,'1',350.00,1050.00),(1,8,3,'1',350.00,1050.00),(1,9,5,'1',350.00,1750.00),(2,6,1,'1',250.00,250.00),(2,7,3,'1',250.00,750.00),(2,8,6,'1',250.00,1500.00),(2,9,2,'1',250.00,500.00);
+INSERT INTO `productoxpedido` VALUES (1,6,3,'1',350.00,1050.00),(1,8,3,'1',350.00,1050.00),(1,9,5,'1',350.00,1750.00),(1,10,3,'1',350.00,1050.00),(2,6,1,'1',250.00,250.00),(2,7,3,'1',250.00,750.00),(2,8,6,'1',250.00,1500.00),(2,9,2,'1',250.00,500.00),(2,10,5,'1',250.00,1250.00);
 /*!40000 ALTER TABLE `productoxpedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -733,4 +734,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-15 23:32:02
+-- Dump completed on 2024-11-13 17:22:35

@@ -147,3 +147,7 @@ opacity: 0.8;
   color: red;
   margin-left: 5px;
 }
+
+.disabled-link {
+  color: #909192;
+}
