@@ -293,6 +293,18 @@ app.get('/pedidos/:id_pedido', (req, res) => {
   });
 });
 
+app.patch('/pedidos/:id_pedido', (req, res) => {
+  let estadoPedido = req.query.estado_pedido || '';
+  const id_pedido = req.params.id_pedido;
+
+  connection.query(`UPDATE pedido SET estado_pedido=${estadoPedido} WHERE id_pedido=${id_pedido}`, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      return res.status(200).json(results);
+  });
+})
+
 
 // RUTAS LOGIN
 app.post('/login', (req, res) => {

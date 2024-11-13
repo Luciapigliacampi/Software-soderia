@@ -343,3 +343,33 @@ const botonCerrarSesion = document.getElementById("botonCerrarSesion");
       localStorage.removeItem("usuario");
       location.href = "login.html"
     })
+
+    function actualizarEstadoPedido(idPedido, nuevoEstado) {
+        axios.patch(`http://localhost:3000/pedidos/${idPedido}?estado_pedido=${nuevoEstado}`)
+            .then(response => {
+                Swal.fire({
+                    text: "Estado del pedido actualizado correctamente",
+                    icon: "success",
+                    confirmButtonColor: "#1952A0"
+                }).then(() => {
+                    // Cierra el modal después de mostrar el mensaje de éxito
+                    $('#modal-default').modal('hide');
+                    obtenerPedidos(); // Actualiza la tabla de pedidos en la página
+                });
+            })
+            .catch(error => {
+                Swal.fire({
+                    text: "Hubo un problema al actualizar el estado del pedido",
+                    icon: "error",
+                    confirmButtonColor: "#1952A0"
+                });
+                console.error('Error:', error);
+            });
+    }
+    
+    // Agregar el evento al botón "Guardar cambios" en el modal
+    document.querySelector("#modal-default .btn-primary").addEventListener('click', function () {
+        const idPedido = document.getElementById("modalNumeroPedido").textContent.trim();
+        const nuevoEstado = document.getElementById("estadoModal").value;
+        actualizarEstadoPedido(idPedido, nuevoEstado);
+    });    
