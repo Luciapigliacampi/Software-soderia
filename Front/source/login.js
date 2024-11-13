@@ -1,3 +1,7 @@
+if(localStorage.getItem("usuario")) {
+    location.href = "panel.html"
+}
+
 const formularioLogin = document.getElementById("formularioLogin")
 formularioLogin.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -11,6 +15,8 @@ formularioLogin.addEventListener('submit', (event) => {
         alert("Usuario o clave incorrecta");
         return;
     }
+
+    localStorage.setItem("usuario", "Lucia Pigliacampi") 
 
     location.href = "panel.html"
     

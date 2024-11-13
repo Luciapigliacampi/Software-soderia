@@ -125,14 +125,14 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="productos.html" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Productos
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a href="pedidos.html" class="nav-link">
@@ -143,17 +143,17 @@
             </a>
           </li>
           
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="recorridos.html" class="nav-link">
               <i class="nav-icon fas fa-truck"></i>
               <p>
                 Recorridos
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
-            <a href="login.html" class="nav-link">
+            <a href="#" class="nav-link" id="botonCerrarSesion">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión
@@ -194,27 +194,30 @@
             <form action="" id="formulario">
               <div class="card-body">
                 <div class="form-group row">
-                  <div class="col-12">
-                    <label for="datosContacto">Datos personales</label>
-                  </div>
+                  
 
                     <div class="col-12 mb-3">
+                      <label for="telefono" class="required">Nombre/Razón Social</label>
                       <input type="text" class="form-control" id="nombre" placeholder="Nombre/Razón social"  name="nombre">
                     </div>
                     <div class="col-12 mb-3">
+                      <label for="telefono" class="required">Apellido</label>
                       <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" >
                     </div>
                  
                   <div class="col-6 col-sm-4 col-md-3 mb-3 mb-sm-0">
+                    <label for="telefono" class="required">Tipo de Documento</label>
                     <select class="form-control"  id="tipoDocumento" name="tipoDocumento">
                       <option value="">Tipo de documento</option>
                     </select>
                   </div>
                   <div class="col-6 col-sm-4 col-md-3">
+                    <label for="telefono" class="required">Número de documento</label>
                     <input type="number" class="form-control" id="numeroDoc" name="numeroDoc" placeholder="Número" >
                   </div>
                   
                   <div class="col-12 col-sm-4 col-md-6">
+                    <label for="telefono">Condición frente al IVA</label>
                     <select class="form-control"  id="condicionIVA" name="condicionIVA">
                       <option value="">Cond. frente al IVA</option>
                     </select>
@@ -223,20 +226,19 @@
                 </div>
 
                 <div class="form-group row">
-                  <div class="col-12">
-                    <label for="telefono">Datos de contacto</label>
-                  </div>
                   <div class="col-5">
-                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" >
+                    <label for="telefono" class="required">Teléfono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="1111111111" >
                   </div>
                   <div class="col-7">
-                    <input type="text" class="form-control" placeholder="E-mail" id="email" name="email">
+                    <label for="telefono">E-mail</label>
+                    <input type="text" class="form-control" placeholder="nombre@mail.com" id="email" name="email">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <div class="col-12">
-                    <label for="direccion">Dirección</label>
+                    <label for="direccion" class="required">Dirección</label>
                   </div>
                   <div class="col-9 col-md-6 col-lg-8 mb-3">
                     <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" >

@@ -1,3 +1,8 @@
+if(!localStorage.getItem("usuario")) {
+    location.href = "login.html"
+}
+
+
 // LISTADO DE CLIENTES
 const listaClientes = document.getElementById("listaClientes")
 listaClientes.addEventListener("change", (event) => {
@@ -233,4 +238,10 @@ formPedido.addEventListener("submit", (event) => {
     })
 })
 
+const botonCerrarSesion = document.getElementById("botonCerrarSesion");
+    botonCerrarSesion.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.removeItem("usuario");
+      location.href = "login.html"
+    })
 

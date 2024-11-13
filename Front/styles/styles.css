@@ -141,3 +141,9 @@ opacity: 0.8;
 #contenedorErrores {
   color: #ff0b0b;
 }
+
+.required::after {
+  content: '*';
+  color: red;
+  margin-left: 5px;
+}

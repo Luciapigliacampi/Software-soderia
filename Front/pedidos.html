@@ -186,14 +186,14 @@
             </ul> -->
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="productos.html" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Productos
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item">
             <a href="pedidos.html" class="nav-link">
@@ -217,8 +217,8 @@
             </a>
           </li>
 
-          <li class="nav-item fixed-bottom">
-            <a href="login.html" class="nav-link">
+          <li class="nav-item">
+            <a href="#" class="nav-link" id="botonCerrarSesion">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Cerrar sesión
@@ -286,26 +286,23 @@
                 <div class="card-tools">
                   
                   <div class="input-group input-group-sm buscador-clientes">
-                    <div class="input-group-append">
-
-                      <a class="btn" href="#">
-                        <i class="fas fa-sort-amount-down-alt"></i>
-                      </a>
-                
-                      <a class="btn" href="#">
-                        <i class="fas fa-filter"></i>
-                      </a>
-
-                      <a class="btn" href="#">
-                        <i class="fas fa-download"></i>
-                      </a>
-
-                      <a class="btn" href="nuevo_pedido.html">
-                        <i class="fas fa-plus"></i>
-                      </a>
-
-                    </div>
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar">
+                    <label for="fechaDesde">Desde</label>
+                    <input type="date" name="fechaDesde" id="fechaDesde" class="form-control mx-2">
+                    <label for="fechaHasta">Hasta</label>
+                    <input type="date" name="fechaHasta" id="fechaHasta" class="form-control mx-2">
+                    <select class="form-control mx-1" name="selectEstado" id="selectEstado">
+                      <option value="">Todos</option>
+                      <option value="1">Pendiente</option>
+                    <option value="2">En preparación</option>
+                    <option value="3">Listo para reparto</option>
+                    <option value="4">En reparto</option>
+                    <option value="5">Entregado</option>
+                    <option value="6">Demorado</option>
+                    <option value="7">Cancelado</option>
+                    </select>
+                    
+                    
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Buscar" id="textoBusqueda">
 
                     <div class="input-group-append">
 
@@ -314,6 +311,26 @@
                       <button type="submit" class="btn">
                         <i class="fas fa-search"></i>
                       </button>
+                    </div>
+                    <div class="input-group-append">
+                      
+
+                      <!-- <a class="btn" href="#">
+                        <i class="fas fa-sort-amount-down-alt"></i>
+                      </a> -->
+                
+                      <!-- <a class="btn" href="#">
+                        <i class="fas fa-filter"></i>
+                      </a> -->
+
+                      <!-- <a class="btn" href="#">
+                        <i class="fas fa-download"></i>
+                      </a> -->
+
+                      <a class="btn" href="nuevo_pedido.html">
+                        <i class="fas fa-plus"></i>
+                      </a>
+
                     </div>
                   </div>
                 </div>

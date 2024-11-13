@@ -1,3 +1,7 @@
+if(!localStorage.getItem("usuario")) {
+    location.href = "login.html"
+}
+
 obtenerLocalidades()
 let selectLocalides = document.getElementById("localidad");
 function obtenerLocalidades() {
@@ -279,3 +283,10 @@ function crearObjeto() {
     return contenidoFormulario
 
 }
+
+const botonCerrarSesion = document.getElementById("botonCerrarSesion");
+    botonCerrarSesion.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.removeItem("usuario");
+      location.href = "login.html"
+    })

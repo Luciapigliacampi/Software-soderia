@@ -1,7 +1,42 @@
+if(!localStorage.getItem("usuario")) {
+    location.href = "login.html"
+}
+
+const fechaDesde = document.getElementById("fechaDesde");
+const fechaHasta = document.getElementById("fechaHasta");
+const selectEstado = document.getElementById("selectEstado");
+const textoBusqueda = document.getElementById("textoBusqueda");
+
+let retardoEspera = null;
+textoBusqueda.addEventListener('input', (event) => {
+    event.preventDefault();
+    clearTimeout(retardoEspera);
+    retardoEspera = setTimeout(() => {
+        obtenerPedidos()
+    }, 300); 
+})
+
+fechaDesde.addEventListener('change', (event) => {
+    event.preventDefault();
+    obtenerPedidos()
+} )
+
+fechaHasta.addEventListener('change', (event) => {
+    event.preventDefault();
+    obtenerPedidos()
+} )
+
+selectEstado.addEventListener('change', (event) => {
+    event.preventDefault();
+    obtenerPedidos()
+} )
+
 obtenerPedidos()
 
 function obtenerPedidos() {
-    axios.get('http://localhost:3000/pedidos')
+let filtro = `?nombre=${textoBusqueda.value}&estado_pedido=${selectEstado.value}&desde=${fechaDesde.value}&hasta=${fechaHasta.value}`
+
+    axios.get('http://localhost:3000/pedidos' + filtro)
         .then(respuesta => {
 
             let datos = respuesta.data;
@@ -40,7 +75,7 @@ function obtenerPedidos() {
                 datoTotal.textContent = registro.total;
 
                 let estadoPedido = "";
-                switch (parseInt(registro.estado)) {
+                switch (parseInt(registro.estado_pedido)) {
                     case 1:
                         estadoPedido = "Pendiente"
                         break;
@@ -298,3 +333,10 @@ function obtenerDetallePedido(id_pedido) {
         });
 
 }
+
+const botonCerrarSesion = document.getElementById("botonCerrarSesion");
+    botonCerrarSesion.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.removeItem("usuario");
+      location.href = "login.html"
+    })

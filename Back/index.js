@@ -193,7 +193,28 @@ app.get('/productos', (req, res) => {
 
 // RUTAS PARA PEDIDOS
 app.get('/pedidos', (req, res) => {
-  connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente WHERE p.estado <> 0 ORDER BY p.id_pedido desc`, (err, results) => {
+  let nombre = req.query.nombre || '';
+  let estadoPedido = req.query.estado_pedido || '';
+  let fechaDesde = req.query.desde || '';
+  let fechaHasta = req.query.hasta || '';
+
+  if (nombre) {
+    nombre = `AND CONCAT(c.nombre, ' ', c.apellido) LIKE '%${nombre}%'`
+  }
+
+  if (estadoPedido) {
+    estadoPedido = `AND p.estado_pedido = ${estadoPedido}`
+  }
+
+  if (fechaDesde) {
+    fechaDesde =  `AND p.fecha >= '${fechaDesde} 00:00:00'`
+  }
+
+  if (fechaHasta) {
+    fechaHasta = `AND p.fecha <= '${fechaHasta} 23:59:59'`
+  }
+
+  connection.query(`SELECT p.*, CONCAT(c.nombre, ' ', c.apellido) as nombre_cliente FROM pedido as p INNER JOIN cliente as c on p.id_cliente = c.id_cliente WHERE p.estado <> 0 ${nombre} ${estadoPedido} ${fechaDesde} ${fechaHasta} ORDER BY p.id_pedido desc`, (err, results) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }

@@ -1,3 +1,7 @@
+if(!localStorage.getItem("usuario")) {
+    location.href = "login.html"
+}
+
 const selectEstado = document.getElementById("selectEstado")
 selectEstado.addEventListener('change', (event) => {
     event.preventDefault();
@@ -471,3 +475,11 @@ function crearObjeto() {
 
     return contenidoFormulario
 }
+
+const botonCerrarSesion = document.getElementById("botonCerrarSesion");
+    botonCerrarSesion.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.removeItem("usuario");
+      location.href = "login.html"
+    })
+
