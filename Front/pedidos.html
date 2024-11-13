@@ -35,9 +35,8 @@
 
 
 
-  <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
+    
     <ul class="navbar-nav d-flex align-items-center">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -45,9 +44,9 @@
       <li class="nav-item"><h4 class="nav-link">Pedidos</h4></li>
     </ul>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
+
+    <!-- <ul class="navbar-nav ml-auto">
+
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
@@ -69,7 +68,7 @@
         </div>
       </li>
 
-      <!-- Notifications Dropdown Menu -->
+
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
@@ -101,7 +100,7 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-    </ul>
+    </ul> -->
   </nav>
   <!-- /.navbar -->
 
@@ -217,7 +216,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item fixed-bottom">
             <a href="#" class="nav-link" id="botonCerrarSesion">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
@@ -393,7 +392,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Pedido N° 1</h4>
+            <h4 class="modal-title">Pedido N° <a id="modalNumeroPedido"></a></h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -404,7 +403,7 @@
               <p class="col-12">Cliente: <a href="#" id="modalCliente"></a><p>
               
               <p class="col-12">Estado: 
-                  <select id="estadoModal" class="form-control-pedidos col-6">
+                  <select id="estadoModal" class="form-control-pedidos col-6" disabled>
                     <option value="1">Pendiente</option>
                     <option value="2">En preparación</option>
                     <option value="3">Listo para reparto</option>

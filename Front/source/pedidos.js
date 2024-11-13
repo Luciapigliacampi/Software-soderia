@@ -262,11 +262,14 @@ function obtenerDetallePedido(id_pedido) {
 
             console.log(datos);
 
+            let numeroPedido = document.getElementById("modalNumeroPedido");
+            numeroPedido.innerHTML = datos.id_pedido
+
             let cliente = document.getElementById("modalCliente");
             cliente.textContent = datos.cliente
 
             let estado = document.getElementById("estadoModal");
-            estado.value = datos.estado;
+            estado.value = datos.estado_pedido;
 
             let tablaDetallePedido = document.getElementById("detallePedido");
             tablaDetallePedido.innerHTML = "";

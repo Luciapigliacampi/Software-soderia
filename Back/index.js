@@ -260,8 +260,10 @@ app.get('/pedidos/:id_pedido', (req, res) => {
   const id_pedido = req.params.id_pedido;
 
   let objetoRespuesta = {
+    id_pedido: 0,
     cliente: "",
     estado: "",
+    estado_pedido: "",
     subtotal: 0,
     iva: 0,
     total: 0,
@@ -272,8 +274,10 @@ app.get('/pedidos/:id_pedido', (req, res) => {
       if (err) {
           return res.status(500).json({ error: err.message });
       }
+      objetoRespuesta.id_pedido = results[0].id_pedido
       objetoRespuesta.cliente = results[0].nombre_cliente
       objetoRespuesta.estado = results[0].estado
+      objetoRespuesta.estado_pedido = results[0].estado_pedido
       objetoRespuesta.subtotal = results[0].subtotal
       objetoRespuesta.iva = results[0].iva
       objetoRespuesta.total = results[0].total
